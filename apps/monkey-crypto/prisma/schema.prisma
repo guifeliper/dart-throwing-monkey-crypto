@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model TokenDrawn {
+  id             Int      @id @default(autoincrement())
+  name           String
+  symbol         String
+  priceAtDrawn   Decimal  @db.Decimal(18, 8)
+  createdAt      DateTime @default(now())
+  priceAtContest Decimal  @db.Decimal(18, 8)
+  lastModified   DateTime @updatedAt
+  category       String
+  timeframe      String
+}

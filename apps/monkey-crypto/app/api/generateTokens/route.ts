@@ -1,5 +1,9 @@
 import selectTokens from "@/utils/selectTokens";
 import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import getYearWeekString from "@/utils/getYearWeekString";
+
+const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
   const url =
@@ -16,12 +20,23 @@ export async function GET(request: Request) {
     return {
       name: token.name,
       symbol: token.symbol,
-      price: token.quote["USD"].price,
-      last_updated: token.last_updated,
+      priceAtDrawn: token.quote["USD"].price,
+      priceAtContest: 0,
+      category: "100",
+      timeframe: getYearWeekString(),
     };
   });
 
   const selectedTokens = selectTokens(tokensList, 10);
+  return await addTokensDrawn(selectedTokens);
+}
 
-  return NextResponse.json({ selectedTokens });
+async function addTokensDrawn(data: any) {
+  try {
+    await prisma.tokenDrawn.createMany({ data });
+    return new Response("Add Successfully", { status: 200 });
+  } catch (error) {
+    console.error("Request error", error);
+    return new Response("Erro on add new items", { status: 500 });
+  }
 }
