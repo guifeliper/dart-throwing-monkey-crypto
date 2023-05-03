@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["DATABASE_URL", "COINMARKETCAP_URL", "COINMARKETCAP_API"],
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
