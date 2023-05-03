@@ -1,3 +1,4 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 import selectTokens from "@/utils/selectTokens";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
@@ -6,11 +7,10 @@ import getYearWeekString from "@/utils/getYearWeekString";
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
-  const url =
-    "https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=100";
+  const url = process.env.COINMARKETCAP_URL ?? ""
   var options = {
     headers: {
-      "X-CMC_PRO_API_KEY": "b54bcf4d-1bca-4e8e-9a24-22ff2c3d462c",
+      "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
     },
   };
   const res = await fetch(url, options);
