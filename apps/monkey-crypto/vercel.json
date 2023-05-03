@@ -1,6 +1,6 @@
 {
     "crons": [{
       "path": "/api/generateTokens",
-      "schedule": "37 21 * * 3"
+      "schedule": "45 21 * * 3"
     }]
   }
