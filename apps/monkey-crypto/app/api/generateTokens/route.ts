@@ -2,6 +2,7 @@
 import selectTokens from "@/utils/selectTokens";
 import getYearWeekString from "@/utils/getYearWeekString";
 import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
@@ -36,9 +37,9 @@ async function addTokensDrawn(data: any) {
   try {
     const result = await prisma.tokenDrawn.createMany({ data });
     console.log("my result", result);
-    return new Response("Add Successfully", { status: 200 });
+    return NextResponse.json({ fields: "Add Successfully" }, { status: 200 });
   } catch (error) {
     console.error("Request error", error);
-    return new Response("Erro on add new items", { status: 500 });
+    return NextResponse.json({ fields: "Error on add" }, { status: 500 });
   }
 }
