@@ -27,6 +27,7 @@ export async function GET(request: Request) {
   });
 
   const selectedTokens = selectTokens(tokensList, 10);
+  console.log("selectedTokens", selectTokens);
   return await addTokensDrawn(selectedTokens);
 }
 
