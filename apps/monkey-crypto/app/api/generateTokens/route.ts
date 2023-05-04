@@ -1,13 +1,12 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import selectTokens from "@/utils/selectTokens";
-import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import getYearWeekString from "@/utils/getYearWeekString";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
-  const url = process.env.COINMARKETCAP_URL ?? ""
+  const url = process.env.COINMARKETCAP_URL ?? "";
   var options = {
     headers: {
       "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
