@@ -26,14 +26,16 @@ export async function GET(request: Request) {
     };
   });
 
+  console.log("weekday", getYearWeekString());
   const selectedTokens = selectTokens(tokensList, 10);
-  console.log("selectedTokens", selectTokens);
+  console.log("selectedTokens", selectedTokens);
   return await addTokensDrawn(selectedTokens);
 }
 
 async function addTokensDrawn(data: any) {
   try {
-    await prisma.tokenDrawn.createMany({ data });
+    const result = await prisma.tokenDrawn.createMany({ data });
+    console.log("my result", result);
     return new Response("Add Successfully", { status: 200 });
   } catch (error) {
     console.error("Request error", error);
