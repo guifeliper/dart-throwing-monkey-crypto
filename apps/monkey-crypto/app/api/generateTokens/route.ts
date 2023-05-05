@@ -5,13 +5,14 @@ import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
-
+export const revalidate = 60;
 export async function GET(request: Request) {
   const url = process.env.COINMARKETCAP_URL ?? "";
   var options = {
     headers: {
       "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
     },
+    next: { revalidate: 60 },
   };
   const res = await fetch(url, options);
   const data = await res.json();

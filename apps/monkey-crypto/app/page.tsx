@@ -9,7 +9,7 @@ export default function Home() {
   const [result, setResult] = useState();
 
   const handleFetch = () => {
-    fetch("/api/generateTokens")
+    fetch("/api/generateTokens", { cache: 'no-store' })
       .then((res) => {
         return res.json();
       })
