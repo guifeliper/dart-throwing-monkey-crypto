@@ -7,13 +7,14 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 export const revalidate = 60;
 export async function GET(request: Request) {
-  const url = process.env.COINMARKETCAP_URL ?? "";
+  const url = `${process.env.COINMARKETCAP_URL}/v1/cryptocurrency/listings/latest?limit=100` ?? "";
   var options = {
     headers: {
       "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
     },
     next: { revalidate: 60 },
   };
+
   const res = await fetch(url, options);
   const data = await res.json();
 
@@ -28,16 +29,13 @@ export async function GET(request: Request) {
     };
   });
 
-  console.log("weekday", getYearWeekString());
   const selectedTokens = selectTokens(tokensList, 10);
-  console.log("selectedTokens", selectedTokens);
   return await addTokensDrawn(selectedTokens);
 }
 
 async function addTokensDrawn(data: any) {
   try {
     const result = await prisma.tokenDrawn.createMany({ data });
-    console.log("my result", result);
     return NextResponse.json({ fields: "Add Successfully" }, { status: 200 });
   } catch (error) {
     console.error("Request error", error);
