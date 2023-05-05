@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import { useState } from "react";
+import DumbLayout from "@/components/Layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,15 +21,5 @@ export default function Home() {
         setResult(req);
       });
   };
-  return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24">
-      <div className="text-white">Here it is: {JSON.stringify(result)}</div>
-      <button
-        className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-        onClick={handleFetch}
-      >
-        Call endpoint and display value
-      </button>
-    </main>
-  );
+  return <DumbLayout />;
 }
