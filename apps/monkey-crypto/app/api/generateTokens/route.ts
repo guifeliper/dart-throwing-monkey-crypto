@@ -1,10 +1,9 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import selectTokens from "@/utils/selectTokens";
 import getYearWeekString from "@/utils/getYearWeekString";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
 export const revalidate = 10;
 export async function GET(request: Request) {
   const url =
