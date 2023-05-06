@@ -1,6 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["DATABASE_URL", "COINMARKETCAP_URL", "COINMARKETCAP_API", "APP_KEY"],
+  "globalEnv": ["DATABASE_URL", "COINMARKETCAP_URL", "COINMARKETCAP_API", "APP_KEY", "NODE_ENV"],
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {

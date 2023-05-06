@@ -1,25 +1,31 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
-import selectTokens from "@/utils/selectTokens";
 import getYearWeekString from "@/utils/getYearWeekString";
-import { PrismaClient, TokenDrawn } from "@prisma/client";
+import { TokenDrawn } from "@prisma/client";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
-const prisma = new PrismaClient();
 export const revalidate = 10;
-export async function GET() {
-  const getCurrentWeek = getYearWeekString();
-  const tokensToUpdate = await prisma.tokenDrawn.findMany({
-    where: {
-      category: "100",
-      timeframe: getCurrentWeek,
-    },
-  });
-  const tokens = tokensToUpdate.map((token) => token.symbol);
-  const tokensString = tokens.join(",");
-  const tokensPrice = await getCurrentTokenList(tokensString);
 
+interface TokenPrice {
+  name: any;
+  symbol: any;
+  price: any;
+}
+export async function GET() {
+  const tokensToUpdate = (await getTokenDrawn()) as TokenDrawn[];
+
+  if (!Array.isArray(tokensToUpdate)) {
+    return NextResponse.json(
+      { message: "Error on data to update" },
+      { status: 500 }
+    );
+  }
+  const tokensPrice = (await getCurrentTokenList(
+    tokensToUpdate
+  )) as TokenPrice[];
+  
   await Promise.all(
-    tokensToUpdate.map((token) => {
+    tokensToUpdate?.map((token) => {
       const price = tokensPrice.find(
         (tokenPrice: { symbol: string }) =>
           tokenPrice.symbol.toLocaleLowerCase() ==
@@ -35,29 +41,41 @@ export async function GET() {
   );
 }
 
-async function getCurrentTokenList(tokensString: string) {
-  const url =
-    `${process.env.COINMARKETCAP_URL}/v1/cryptocurrency/quotes/latest?symbol=${tokensString}` ??
-    "";
-  var options = {
-    headers: {
-      "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
-    },
-    next: { revalidate: 60 },
-  };
-  const data = await fetch(url, options)
-    .then((res) => res.json())
-    .then((res) => res.data);
-
-  const result = Object.values(data).map((token: any) => {
-    return {
-      name: token.name,
-      symbol: token.symbol,
-      price: token.quote.USD.price,
+async function getCurrentTokenList(tokensToUpdate: TokenDrawn[]) {
+  try {
+    const tokens = tokensToUpdate?.map((token) => token.symbol);
+    const tokensString = tokens.join(",");
+    const url =
+      `${process.env.COINMARKETCAP_URL}/v1/cryptocurrency/quotes/latest?symbol=${tokensString}` ??
+      "";
+    var options = {
+      headers: {
+        "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
+      },
+      next: { revalidate: 60 },
     };
-  });
-  return result;
-  // /v1/cryptocurrency/quotes/latest?symbol=HBAR,API3,TFUEL,ZEN,BTG,HNT,AUDIO,XYM,ERG,BSW,NEXO,CAKE,XDC,UNI,BCH,LINK,BAT,AXS,CRO,CRV
+    const data = await fetch(url, options)
+      .then((res) => res.json())
+      .then((res) => res.data);
+
+    const result = Object.values(data).map((token: any) => {
+      return {
+        name: token.name,
+        symbol: token.symbol,
+        price: token.quote.USD.price,
+      };
+    });
+    if (result?.length < 0) {
+      throw new Error("Data not found");
+    }
+    return result;
+  } catch (error) {
+    console.error("Request error", error);
+    return NextResponse.json(
+      { message: "Error on update data" },
+      { status: 500 }
+    );
+  }
 }
 
 async function updateTokenDrawn(data: TokenDrawn, newPrice: number) {
@@ -74,6 +92,29 @@ async function updateTokenDrawn(data: TokenDrawn, newPrice: number) {
     console.error("Request error", error);
     return NextResponse.json(
       { message: "Error on update data", name: data.name },
+      { status: 500 }
+    );
+  }
+}
+
+async function getTokenDrawn() {
+  try {
+    const getCurrentWeek = getYearWeekString();
+    const result = await prisma.tokenDrawn.findMany({
+      where: {
+        category: "100",
+        timeframe: getCurrentWeek,
+      },
+    });
+    if (result.length < 0) {
+      throw new Error("Data not available");
+    }
+
+    return result;
+  } catch (error) {
+    console.error("Request error", error);
+    return NextResponse.json(
+      { message: "Error on update data" },
       { status: 500 }
     );
   }
