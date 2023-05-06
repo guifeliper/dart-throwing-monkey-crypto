@@ -509,10 +509,8 @@ export default function DumbLayout() {
                             {item.date}
                           </time>
                           <div
-                            className={classNames(
-                              statuses[item.status],
-                              "flex-none rounded-full p-1"
-                            )}
+                            className={"flex-none rounded-full p-1"
+                            }
                           >
                             <div className="h-1.5 w-1.5 rounded-full bg-current" />
                           </div>
