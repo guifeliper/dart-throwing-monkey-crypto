@@ -1,6 +1,12 @@
 {
-    "crons": [{
+  "crons": [
+    {
       "path": "/api/generateTokens",
-      "schedule": "0 17 * * 1"
-    }]
-  }
+      "schedule": "5 0 * * 0"
+    },
+    {
+      "path": "/api/updateTokens",
+      "schedule": "45 23 * * 6"
+    }
+  ]
+}
