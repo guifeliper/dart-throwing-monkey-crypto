@@ -11,7 +11,7 @@ The Dart-Throwing Monkey theory is based on the idea that the stock market is un
 To run this project, you need to have Node.js installed on your system. Follow these steps to run the project:
 
 1. Clone this repository to your local machine using the command `git clone https://github.com/guifeliper/dart-throwing-monkey-crypto.git`.
-2. Navigate to the project directory using the command `cd dart-throwing-monkey`.
+2. Navigate to the project directory using the command `cd dart-throwing-monkey-crypto`.
 3. Install the dependencies by running the command `npm install`.
 4. Start the development server using the command `npm run dev`.
 5. Open your browser and go to `http://localhost:3000` to see the website in action.
