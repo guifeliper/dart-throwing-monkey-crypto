@@ -14,14 +14,19 @@ const TokenIcon = ({ symbol }: { symbol: string }) => {
     const importIcon = async () => {
       try {
         const iconModule = await import(
-          `cryptocurrency-icons/svg/black/${symbol.toLowerCase()}.svg`
+          `cryptocurrency-icons/svg/color/${symbol.toLowerCase()}.svg`
         );
 
         const svgContent = iconModule.default;
-        console.log(svgContent);
         setIcon(svgContent);
       } catch (error) {
         console.error(`Error importing icon for symbol ${symbol}:`, error);
+        // Import the generic icon as fallback
+        const genericIconModule = await import(
+          "cryptocurrency-icons/svg/color/generic.svg"
+        );
+        const genericSvgContent = genericIconModule.default;
+        setIcon(genericSvgContent);
       }
     };
 
