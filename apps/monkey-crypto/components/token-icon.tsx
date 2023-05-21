@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import DefaultIcon from "cryptocurrency-icons/svg/color/generic.svg";
 
 interface Icon {
   height: number;
@@ -8,7 +9,11 @@ interface Icon {
   width: number;
 }
 const TokenIcon = ({ symbol }: { symbol: string }) => {
-  const [icon, setIcon] = useState<Icon>({ height: 32, width: 32, src: "" });
+  const [icon, setIcon] = useState<Icon>({
+    height: 32,
+    width: 32,
+    src: DefaultIcon.src,
+  });
 
   useEffect(() => {
     const importIcon = async () => {
@@ -21,12 +26,6 @@ const TokenIcon = ({ symbol }: { symbol: string }) => {
         setIcon(svgContent);
       } catch (error) {
         console.error(`Error importing icon for symbol ${symbol}:`, error);
-        // Import the generic icon as fallback
-        const genericIconModule = await import(
-          "cryptocurrency-icons/svg/color/generic.svg"
-        );
-        const genericSvgContent = genericIconModule.default;
-        setIcon(genericSvgContent);
       }
     };
 
@@ -36,7 +35,7 @@ const TokenIcon = ({ symbol }: { symbol: string }) => {
   return (
     <Image
       src={icon?.src}
-      alt="Token logo"
+      alt={`${symbol} token logo`}
       width={icon.width}
       height={icon.height}
     />
