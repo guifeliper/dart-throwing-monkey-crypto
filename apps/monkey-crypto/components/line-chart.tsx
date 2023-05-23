@@ -1,13 +1,32 @@
 "use client";
 import ReactApexChart from "react-apexcharts";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-export const LineChart = () => {
+interface LineChartProps {
+  data: any[];
+}
+export const LineChart = ({ data }: LineChartProps) => {
+  const [series, setSeries] = useState([]);
+  useEffect(() => {
+    const transformedArray = data.map((item) => ({
+      x: item.timeframe,
+      y: parseFloat(item.investment),
+    }));
+
+    setSeries([
+      {
+        name: "Crypto-100",
+        data: transformedArray,
+      },
+    ]);
+  }, []);
+
+  console.log("series", series);
   return (
     <div id="chart">
       <ReactApexChart
-        options={CHART}
-        series={CHART.series}
+        options={CHART as any}
+        series={series}
         type="line"
         height={350}
       />
