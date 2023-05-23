@@ -10,15 +10,15 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^4.13.0",
-    "@types/node": "20.0.0",
-    "@types/react": "18.2.5",
-    "@types/react-dom": "18.2.3",
+    "@prisma/client": "^4.14.1",
+    "@types/node": "20.2.3",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "cryptocurrency-icons": "^0.18.1",
-    "eslint": "8.39.0",
-    "eslint-config-next": "13.4.1",
-    "next": "13.4.1",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
+    "next": "13.4.3",
     "postcss": "8.4.23",
     "random-js": "^2.1.0",
     "react": "18.2.0",
@@ -28,6 +28,6 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "prisma": "^4.13.0"
+    "prisma": "^4.14.1"
   }
 }
