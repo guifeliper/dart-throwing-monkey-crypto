@@ -21,9 +21,7 @@ export default async function Home() {
   return (
     <div className="grid grid-cols-3 gap-0">
       <div className="col-span-2 p-4 bg-gray-200 dark:bg-gray-800">
-        {typeof window !== "undefined" && (
-          <LineChart data={accumulativeInvestment} />
-        )}
+        <LineChart data={accumulativeInvestment} />
       </div>
       <div className="p-4 bg-gray-300 dark:bg-gray-500">
         <WeekTokens data={weekTokens} />

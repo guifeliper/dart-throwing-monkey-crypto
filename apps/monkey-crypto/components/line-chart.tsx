@@ -1,15 +1,16 @@
 "use client";
-import ReactApexChart from "react-apexcharts";
 import React from "react";
 import { AccumulativeInvestmentProps } from "@/utils/calculateInvestment";
-
+import dynamic from 'next/dynamic'
+    
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 interface LineChartProps {
   data: AccumulativeInvestmentProps[];
 }
 export const LineChart = ({ data }: LineChartProps) => {
   return (
     <div id="chart">
-      <ReactApexChart
+      <Chart
         options={CHART as any}
         series={data}
         type="line"
