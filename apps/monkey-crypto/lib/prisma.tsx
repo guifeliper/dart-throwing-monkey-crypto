@@ -2,7 +2,7 @@
 import calculateInvestment, {
   GroupPercentageData,
 } from "@/utils/calculateInvestment";
-import { PrismaClient, TokenDrawn } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = global as unknown as {
   prisma: PrismaClient | undefined;
