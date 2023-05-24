@@ -23,9 +23,12 @@ export async function GET() {
   const tokensPrice = (await getCurrentTokenList(
     tokensToUpdate
   )) as TokenPrice[];
-  
+
   await Promise.all(
     tokensToUpdate?.map((token) => {
+      if (tokensPrice === null || tokensPrice === undefined) {
+        return {};
+      }
       const price = tokensPrice?.find(
         (tokenPrice: { symbol: string }) =>
           tokenPrice.symbol.toLocaleLowerCase() ==
