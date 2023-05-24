@@ -7,10 +7,6 @@ interface LineChartProps {
   data: AccumulativeInvestmentProps[];
 }
 export const LineChart = ({ data }: LineChartProps) => {
-  if (typeof window === "undefined") {
-    return null; // Return null when rendering on the server
-  }
-
   return (
     <div id="chart">
       <ReactApexChart

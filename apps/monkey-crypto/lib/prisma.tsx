@@ -1,6 +1,6 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import calculateInvestment, {
-  groupPercentageData,
+  GroupPercentageData,
 } from "@/utils/calculateInvestment";
 import { PrismaClient, TokenDrawn } from "@prisma/client";
 
@@ -21,7 +21,7 @@ export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
      * a full name and without a password
      */
     async accumulativeInvestment() {
-      const percentageByGroup: groupPercentageData[] =
+      const percentageByGroup: GroupPercentageData[] =
         await prisma.$queryRaw`SELECT   category,   timeframe,   AVG((priceAtContest - priceAtDrawn) / priceAtDrawn * 100) AS percentage_difference FROM   TokenDrawn WHERE priceAtContest <> 0 GROUP BY   category,   timeframe;`;
 
       return calculateInvestment(percentageByGroup);
