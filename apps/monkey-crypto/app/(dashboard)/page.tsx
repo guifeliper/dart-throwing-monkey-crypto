@@ -11,17 +11,17 @@ export default async function Home() {
   const getCurrentWeek = getYearWeekString();
   const weekTokens = await tokenDrawn.findMany({
     where: {
-      category: "100",
+      category: "Top-100",
       timeframe: getCurrentWeek,
     },
   });
   
-  const calculatedInvesment = await tokenDrawn.calculateInvestment();
+  const accumulativeInvestment = await tokenDrawn.accumulativeInvestment();
 
   return (
     <div className="grid grid-cols-3 gap-0">
       <div className="col-span-2 p-4 bg-gray-200 dark:bg-gray-800">
-        <LineChart data={calculatedInvesment} />
+        <LineChart data={accumulativeInvestment} />
       </div>
       <div className="p-4 bg-gray-300 dark:bg-gray-500">
         <WeekTokens data={weekTokens} />

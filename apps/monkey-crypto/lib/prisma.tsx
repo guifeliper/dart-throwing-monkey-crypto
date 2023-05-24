@@ -1,4 +1,7 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
+import calculateInvestment, {
+  groupPercentageData,
+} from "@/utils/calculateInvestment";
 import { PrismaClient, TokenDrawn } from "@prisma/client";
 
 const globalForPrisma = global as unknown as {
@@ -17,22 +20,11 @@ export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
      * Signup the first user and create a new team of one. Return the User with
      * a full name and without a password
      */
-    async calculateInvestment() {
-      const percentageByGroup =
-        await prisma.$queryRaw`SELECT   category,   timeframe,   AVG((priceAtContest - priceAtDrawn) / priceAtDrawn * 100) AS percentage_difference FROM   TokenDrawn WHERE createdAt <> lastModified GROUP BY   category,   timeframe;`;
-      function calculateInvestment(data: any[]) {
-        let investment = 10000;
+    async accumulativeInvestment() {
+      const percentageByGroup: groupPercentageData[] =
+        await prisma.$queryRaw`SELECT   category,   timeframe,   AVG((priceAtContest - priceAtDrawn) / priceAtDrawn * 100) AS percentage_difference FROM   TokenDrawn WHERE priceAtContest <> 0 GROUP BY   category,   timeframe;`;
 
-        return data.map((item) => {
-          investment *= 1 + item.percentage_difference / 100;
-          return {
-            ...item,
-            investment: investment.toFixed(2),
-          };
-        });
-      }
-      console.log(calculateInvestment(percentageByGroup as any[]));
-      return calculateInvestment(percentageByGroup as any[]);
+      return calculateInvestment(percentageByGroup);
     },
   });
 }
