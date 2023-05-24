@@ -22,11 +22,11 @@ export async function GET() {
   }
   const tokensPrice = (await getCurrentTokenList(
     tokensToUpdate
-  )) as TokenPrice[];
+  )) as TokenPrice[] ?? [];
 
   await Promise.all(
     tokensToUpdate?.map((token) => {
-      if (tokensPrice === null || tokensPrice === undefined) {
+      if (!Array.isArray(tokensPrice)) {
         return {};
       }
       const price = tokensPrice?.find(
