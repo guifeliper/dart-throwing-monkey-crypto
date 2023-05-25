@@ -20,9 +20,8 @@ export async function GET() {
       { status: 500 }
     );
   }
-  const tokensPrice = (await getCurrentTokenList(
-    tokensToUpdate
-  )) as TokenPrice[] ?? [];
+  const tokensPrice =
+    ((await getCurrentTokenList(tokensToUpdate)) as TokenPrice[]) ?? [];
 
   await Promise.all(
     tokensToUpdate?.map((token) => {
@@ -35,7 +34,7 @@ export async function GET() {
           token.symbol.toLocaleLowerCase()
       )?.price;
       return updateTokenDrawn(token, price);
-    }) // returns an array of Promises
+    })
   );
 
   return NextResponse.json(
@@ -105,7 +104,6 @@ async function getTokenDrawn() {
     const getCurrentWeek = getYearWeekString();
     const result = await prisma.tokenDrawn.findMany({
       where: {
-        category: "100",
         timeframe: getCurrentWeek,
       },
     });

@@ -3,7 +3,14 @@ import selectTokens from "@/utils/selectTokens";
 import getYearWeekString from "@/utils/getYearWeekString";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-
+interface Tokens {
+  name: string;
+  symbol: string;
+  priceAtDrawn: number;
+  priceAtContest: 0;
+  category: string;
+  timeframe: string;
+}
 export const revalidate = 10;
 export async function GET(request: Request) {
   const url =
@@ -19,17 +26,21 @@ export async function GET(request: Request) {
   const res = await fetch(url, options);
   const data = await res.json();
 
-  const tokensList =
+  const tokensList: Tokens[] =
     data?.data?.map((token: any) => {
       return {
         name: token.name,
         symbol: token.symbol,
         priceAtDrawn: token.quote["USD"].price,
         priceAtContest: 0,
-        category: "100",
+        category: "Top-100",
         timeframe: getYearWeekString(),
       };
     }) ?? [];
+
+  const BTCBenchmark = tokensList
+    .filter((token) => token.symbol === "BTC")
+    .map((token) => ({ ...token, category: "BTC-benchmark" }));
 
   if (tokensList?.length == 0) {
     return NextResponse.json(
@@ -38,7 +49,7 @@ export async function GET(request: Request) {
     );
   }
   const selectedTokens = selectTokens(tokensList, 10);
-  return await addTokensDrawn(selectedTokens);
+  return await addTokensDrawn([...selectedTokens, ...BTCBenchmark]);
 }
 
 async function addTokensDrawn(data: any) {
