@@ -8,11 +8,7 @@ const globalForPrisma = global as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-const prisma =
-  globalForPrisma.prisma ??
-  new PrismaClient({
-    log: ["query"],
-  });
+const prisma = globalForPrisma.prisma ?? new PrismaClient();
 
 export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
   return Object.assign(prismaTokens, {

@@ -4,7 +4,7 @@ import { TokenDrawn } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 10;
+export const revalidate = 60 * 60 * 24 * 6;
 
 interface TokenPrice {
   name: any;
@@ -54,7 +54,7 @@ async function getCurrentTokenList(tokensToUpdate: TokenDrawn[]) {
       headers: {
         "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
       },
-      next: { revalidate: 60 },
+      next: { revalidate: 60 * 60 * 24 * 6 },
     };
     const data = await fetch(url, options)
       .then((res) => res.json())

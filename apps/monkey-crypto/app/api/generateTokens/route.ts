@@ -11,7 +11,7 @@ interface Tokens {
   category: string;
   timeframe: string;
 }
-export const revalidate = 10;
+export const revalidate = 60 * 60 * 24 * 6; // every 6 days
 export async function GET(request: Request) {
   const url =
     `${process.env.COINMARKETCAP_URL}/v1/cryptocurrency/listings/latest?limit=100` ??
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
     headers: {
       "X-CMC_PRO_API_KEY": process.env.COINMARKETCAP_API ?? "",
     },
-    next: { revalidate: 60 },
+    next: { revalidate: 60 * 60 * 24 * 6 },
   };
 
   const res = await fetch(url, options);
