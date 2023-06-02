@@ -28,7 +28,7 @@ export const CHART = {
     },
     background: "#1F2937",
     dropShadow: {
-      enabled: true,
+      enabled: false,
     },
     foreColor: "#fff",
     fontFamily: "Roboto",
@@ -83,6 +83,7 @@ export const CHART = {
     },
   },
   grid: {
+    show: false,
     borderColor: "#6e7eaa",
     padding: {
       right: 25,

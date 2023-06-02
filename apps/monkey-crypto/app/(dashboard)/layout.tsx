@@ -1,6 +1,6 @@
-import { dashboardConfig } from "@/config/dashboard"
-import { MainNav } from "@/components/main-nav"
-import { DashboardNav } from "@/components/nav"
+import { dashboardConfig } from "@/config/dashboard";
+import { MainNav } from "@/components/main-nav";
+import { DashboardNav } from "@/components/nav";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode;
@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   children,
 }: DashboardLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen space-y-6">
+    <div className="flex flex-col min-h-screen">
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex items-center justify-between h-16 py-4">
           <MainNav items={dashboardConfig.mainNav} />
