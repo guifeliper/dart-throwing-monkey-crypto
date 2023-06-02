@@ -5,8 +5,12 @@
       "schedule": "5 0 * * 0"
     },
     {
-      "path": "/api/hello",
+      "path": "/api/updateTokens",
       "schedule": "45 23 * * 6"
+    },
+    {
+      "path": "/api/hello",
+      "schedule": "*/10 * * * *"
     }
   ]
 }
