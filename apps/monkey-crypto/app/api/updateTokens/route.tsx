@@ -3,14 +3,14 @@ import getYearWeekString from "@/utils/getYearWeekString";
 import { TokenDrawn } from "@prisma/client";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-
-export const revalidate = 60 * 60 * 24 * 6;
-
 interface TokenPrice {
   name: any;
   symbol: any;
   price: any;
 }
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 60 * 60 * 24 * 6;
 export async function GET() {
   const tokensToUpdate = (await getTokenDrawn()) as TokenDrawn[];
 

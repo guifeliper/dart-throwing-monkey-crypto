@@ -11,6 +11,8 @@ interface Tokens {
   category: string;
   timeframe: string;
 }
+
+export const dynamic = 'force-dynamic';
 export const revalidate = 60 * 60 * 24 * 6; // every 6 days
 export async function GET(request: Request) {
   const url =
