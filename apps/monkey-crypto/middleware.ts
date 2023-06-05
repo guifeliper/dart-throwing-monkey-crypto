@@ -11,9 +11,9 @@ export function middleware(request: NextRequest, res: NextResponse) {
   const host = request.headers.get("host");
   const frontendOrigin = `${host}`;
 
-  if (!referer || !referer?.includes(frontendOrigin)) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
+  // if (!referer || !referer?.includes(frontendOrigin)) {
+  //   return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  // }
 
   return NextResponse.next();
 }
