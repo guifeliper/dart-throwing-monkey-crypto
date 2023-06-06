@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import getYearWeekString from "@/utils/getYearWeekString";
 import { TokenDrawn } from "@prisma/client";
 import { NextResponse } from "next/server";

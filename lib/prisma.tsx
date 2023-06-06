@@ -1,14 +1,13 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import calculateInvestment, {
   GroupPercentageData,
-} from "@/utils/calculateInvestment";
-import { PrismaClient } from "@prisma/client";
+} from "@/utils/calculateInvestment"
+import { PrismaClient } from "@prisma/client"
 
 const globalForPrisma = global as unknown as {
-  prisma: PrismaClient | undefined;
-};
+  prisma: PrismaClient | undefined
+}
 
-const prisma = globalForPrisma.prisma ?? new PrismaClient();
+const prisma = globalForPrisma.prisma ?? new PrismaClient()
 
 export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
   return Object.assign(prismaTokens, {
@@ -18,13 +17,13 @@ export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
      */
     async accumulativeInvestment() {
       const percentageByGroup: GroupPercentageData[] =
-        await prisma.$queryRaw`SELECT   category,   timeframe,   AVG((priceAtContest - priceAtDrawn) / priceAtDrawn * 100) AS percentage_difference FROM   TokenDrawn WHERE priceAtContest <> 0 GROUP BY   category,   timeframe;`;
+        await prisma.$queryRaw`SELECT   category,   timeframe,   AVG((priceAtContest - priceAtDrawn) / priceAtDrawn * 100) AS percentage_difference FROM   TokenDrawn WHERE priceAtContest <> 0 GROUP BY   category,   timeframe;`
 
-      return calculateInvestment(percentageByGroup);
+      return calculateInvestment(percentageByGroup)
     },
-  });
+  })
 }
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma
 
-export default prisma;
+export default prisma
