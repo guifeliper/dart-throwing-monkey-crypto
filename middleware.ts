@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 

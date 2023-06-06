@@ -8,7 +8,7 @@ interface WeekTokensProps {
 export const WeekTokens = ({ data }: WeekTokensProps) => {
   return (
     <div>
-      <div className="text-xl not-italic font-semibold">Week Tokens</div>
+      <div className="text-xl font-semibold not-italic">Week Tokens</div>
       <ul role="list" className="py-3">
         {data?.map((token) => (
           <TokenItem key={token.id} token={token} />

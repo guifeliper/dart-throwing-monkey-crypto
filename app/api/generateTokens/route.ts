@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import selectTokens from "@/utils/selectTokens";
 import getYearWeekString from "@/utils/getYearWeekString";
 import prisma from "@/lib/prisma";
