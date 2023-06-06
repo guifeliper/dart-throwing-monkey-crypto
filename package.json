@@ -1,30 +1,38 @@
 {
+  "name": "monkey-crypto",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.14.1",
+    "autoprefixer": "10.4.14",
+    "clsx": "^1.2.1",
+    "cryptocurrency-icons": "^0.18.1",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.3",
+    "lucide-react": "^0.240.0",
+    "next": "13.4.3",
+    "postcss": "8.4.23",
+    "random-js": "^2.1.0",
+    "react": "18.2.0",
+    "react-apexcharts": "^1.4.0",
+    "react-dom": "18.2.0",
+    "tailwind-merge": "^1.13.0",
+    "tailwindcss": "3.3.2",
+    "tailwindcss-animate": "^1.0.5"
   },
   "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-custom": "*",
-    "prettier": "^2.5.1",
-    "turbo": "latest"
-  },
-  "name": "monkeyCrypto",
-  "packageManager": "npm@8.15.1",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "dependencies": {
-    "@headlessui/react": "^1.7.14",
-    "@heroicons/react": "^2.0.17",
     "@tailwindcss/typography": "^0.5.9",
-    "clsx": "^1.2.1",
-    "lucide-react": "^0.216.0",
-    "tailwind-merge": "^1.12.0",
-    "tailwindcss-animate": "^1.0.5"
+    "@types/node": "20.2.3",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "prisma": "^4.14.1",
+    "typescript": "5.0.4"
   }
 }
