@@ -1,26 +1,21 @@
-"use client";
-import React from "react";
-import { AccumulativeInvestmentProps } from "@/utils/calculateInvestment";
-import dynamic from 'next/dynamic'
-    
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+"use client"
+import React from "react"
+import { AccumulativeInvestmentProps } from "@/utils/calculateInvestment"
+import dynamic from "next/dynamic"
+// import Chart from "react-apexcharts"
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false })
 interface LineChartProps {
-  data: AccumulativeInvestmentProps[];
+  data: AccumulativeInvestmentProps[]
 }
 export const LineChart = ({ data }: LineChartProps) => {
   return (
     <div id="chart">
-      <Chart
-        options={CHART as any}
-        series={data}
-        type="line"
-        height={350}
-      />
+      <Chart options={OPTIONS as any} series={data} />
     </div>
-  );
-};
+  )
+}
 
-export const CHART = {
+export const OPTIONS = {
   chart: {
     animations: {
       enabled: false,
@@ -103,58 +98,6 @@ export const CHART = {
       sizeOffset: 6,
     },
   },
-  series: [
-    {
-      name: "Bitcoin",
-      data: [
-        {
-          x: "Item 1",
-          y: 31,
-        },
-        {
-          x: "Item 2",
-          y: 40,
-        },
-        {
-          x: "Item 3",
-          y: 28,
-        },
-        {
-          x: "Item 4",
-          y: 51,
-        },
-        {
-          x: "Item 5",
-          y: 42,
-        },
-      ],
-    },
-    {
-      name: "Crypto-100",
-      data: [
-        {
-          x: "Item 1",
-          y: "10",
-        },
-        {
-          x: "Item 2",
-          y: "25",
-        },
-        {
-          x: "Item 3",
-          y: "32",
-        },
-        {
-          x: "Item 4",
-          y: "29",
-        },
-        {
-          x: "Item 5",
-          y: "45",
-        },
-      ],
-    },
-  ],
   stroke: {
     show: true,
     curve: "smooth",
@@ -189,4 +132,4 @@ export const CHART = {
     mode: "dark",
     palette: "palette2",
   },
-};
+}

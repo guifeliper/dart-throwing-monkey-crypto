@@ -6,7 +6,7 @@ export const metadata = {
   title: "Dashboard",
 }
 
-export const revalidate = 60 * 60 * 24 // 1 day
+export const revalidate = 86400 // 1 day
 export default async function Home() {
   const tokenDrawn = TokenDrawns(prisma.tokenDrawn)
   const getCurrentWeek = getYearWeekString()
