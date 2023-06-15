@@ -1,19 +1,17 @@
+
 export interface GroupPercentageData {
   category: string;
-  timeframe: string;
   percentage_difference: number;
+  timeframe: string;
 }
 
 export interface AccumulativeInvestmentProps {
   name: string;
-  data: {
-      x: string;
-      y: string;
-  }[];
+  data: { x: string; y: string }[];
 }
 
 function calculateInvestment(data: GroupPercentageData[]): AccumulativeInvestmentProps[] {
-  const outputArray = [];
+  const outputArray: AccumulativeInvestmentProps[] = [];
 
   const groupedData: { [key: string]: GroupPercentageData[] } = data.reduce(
     (acc: { [key: string]: GroupPercentageData[] }, obj) => {
@@ -53,5 +51,6 @@ function calculateInvestment(data: GroupPercentageData[]): AccumulativeInvestmen
   }
   return outputArray;
 }
+
 
 export default calculateInvestment;
