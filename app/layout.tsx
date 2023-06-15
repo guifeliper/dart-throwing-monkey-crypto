@@ -1,23 +1,26 @@
-import { Inter as FontSans } from "next/font/google";
-import localFont from "next/font/local";
+import { Inter as FontSans } from "next/font/google"
+import localFont from "next/font/local"
 
-import "@/styles/globals.css";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+import "@/styles/globals.css"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { Analytics } from "@/components/analytics"
+import { ThemeProvider } from "@/components/theme-provider"
+import { TailwindIndicator } from "@/components/tailwind-indicator"
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-});
+})
 
 // Font files can be colocated inside of `pages`
 const fontHeading = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
-});
+})
 
 interface RootLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const metadata = {
@@ -38,7 +41,7 @@ export const metadata = {
       name: "Guilherme Reis",
     },
   ],
-  creator: "shadcn",
+  creator: "guifeliper",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -64,7 +67,7 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
@@ -72,13 +75,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body
         className={cn(
-          "dark min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
           fontHeading.variable
         )}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+          <Analytics />
+          <TailwindIndicator />
+        </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

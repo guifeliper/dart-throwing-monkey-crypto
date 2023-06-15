@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: "Dart Thorwing Monkey",
   description:
     "An open source application built to tests the Dart-Throwing Monkey theory on crypto.",
-  url: "https://monkey-crypto-monkey-crypto.vercel.app",
+  url: "https://harv.app",
   ogImage: "",
   links: {
     twitter: "https://twitter.com/guifelipereis",
