@@ -1,5 +1,6 @@
 import { SVGProps } from "react"
 import * as React from "react"
+
 const Logo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="173"
@@ -26,8 +27,8 @@ const Logo = (props: React.SVGProps<SVGSVGElement>) => (
         y2="28.4756"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#043C96" />
-        <stop offset="1" stop-color="#0065B8" />
+        <stop stopColor="#043C96" />
+        <stop offset="1" stopColor="#0065B8" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_1_4"
@@ -37,10 +38,11 @@ const Logo = (props: React.SVGProps<SVGSVGElement>) => (
         y2="109.171"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#02A7D3" />
-        <stop offset="1" stop-color="#4CB8FB" />
+        <stop stopColor="#02A7D3" />
+        <stop offset="1" stopColor="#4CB8FB" />
       </linearGradient>
     </defs>
   </svg>
 )
+
 export default Logo
