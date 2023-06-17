@@ -1,3 +1,4 @@
+import Logo from "@/assets/svg/logo"
 import {
   AlertTriangle,
   ArrowRight,
@@ -32,7 +33,7 @@ import {
 export type Icon = LucideIcon
 
 export const Icons = {
-  logo: BitcoinIcon,
+  logo: Logo,
   close: X,
   spinner: Loader2,
   chevronLeft: ChevronLeft,
