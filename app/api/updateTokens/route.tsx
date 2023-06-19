@@ -97,7 +97,7 @@ async function updateTokenDrawn(data: TokenDrawn, newPrice: number) {
 
 async function getTokenDrawn() {
   try {
-    const getCurrentWeek = "2023_23"
+    const getCurrentWeek = getYearWeekString()
     const result = await prisma.tokenDrawn.findMany({
       where: {
         timeframe: getCurrentWeek,
