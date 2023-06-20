@@ -1,8 +1,9 @@
-import prisma, { TokenDrawns } from "@/lib/prisma"
-import getYearWeekString from "@/utils/getYearWeekString"
 import { Metadata } from "next"
 import { Coins, DollarSign, TrendingDown, TrendingUp } from "lucide-react"
 
+
+import { TokenDrawns, db } from "@/lib/db"
+import getYearWeekString from "@/utils/getYearWeekString"
 import {
   Card,
   CardContent,
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 export const revalidate = 86400 // 1 day
 
 export default async function DashboardPage() {
-  const tokenDrawn = TokenDrawns(prisma.tokenDrawn)
+  const tokenDrawn = TokenDrawns(db.tokenDrawn)
   const getCurrentWeek = getYearWeekString()
   const currentTokens = await tokenDrawn.findMany({
     where: {

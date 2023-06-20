@@ -1,14 +1,23 @@
+import { PrismaClient } from "@prisma/client"
 import { PercentageByGroup, TokenDrawnPerformance } from "@/types/tokenDrawn"
 import calculateInvestment, {
   GroupPercentageData,
 } from "@/utils/calculateInvestment"
-import { PrismaClient, TokenDrawn } from "@prisma/client"
 
-const globalForPrisma = global as unknown as {
-  prisma: PrismaClient | undefined
+declare global {
+  // eslint-disable-next-line no-var
+  var cachedPrisma: PrismaClient
 }
 
-const prisma = globalForPrisma.prisma ?? new PrismaClient()
+let prisma: PrismaClient
+if (process.env.NODE_ENV === "production") {
+  prisma = new PrismaClient()
+} else {
+  if (!global.cachedPrisma) {
+    global.cachedPrisma = new PrismaClient()
+  }
+  prisma = global.cachedPrisma
+}
 
 export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
   return Object.assign(prismaTokens, {
@@ -81,6 +90,4 @@ export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
   })
 }
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma
-
-export default prisma
+export const db = prisma
