@@ -17,7 +17,6 @@ interface TokenDrawnChartProps {
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    console.log(payload)
     return (
       <div className="w-44 rounded-lg border bg-card text-card-foreground shadow-sm">
         <div className="flex flex-col space-y-1.5 p-4">
@@ -57,7 +56,7 @@ export function TokenDrawnChart({ data }: TokenDrawnChartProps) {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `$${value}`}
+          tickFormatter={(value) => `${value}%`}
         />
         <Tooltip
           cursor={{ fill: "#6B7280", opacity: "10%" }}

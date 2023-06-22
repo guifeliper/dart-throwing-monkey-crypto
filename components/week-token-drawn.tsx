@@ -9,7 +9,7 @@ export function WeekTokenDrawn({ data }: WeekTokensProps) {
   return (
     <div className="space-y-4">
       {data.map((item) => (
-        <div className="flex items-center">
+        <div key={item.symbol} className="flex items-center">
           <TokenIcon symbol={item.symbol} />
           <div className="ml-4 space-y-1">
             <p className="text-sm font-medium leading-none">{item.name}</p>
