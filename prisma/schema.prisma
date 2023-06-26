@@ -9,15 +9,16 @@ datasource db {
 }
 
 model TokenDrawn {
-  id             Int      @id @default(autoincrement())
-  name           String
-  symbol         String
-  priceAtDrawn   Decimal  @db.Decimal(18, 8)
-  createdAt      DateTime @default(now())
-  priceAtContest Decimal  @db.Decimal(18, 8)
-  lastModified   DateTime @updatedAt
-  category       String
-  timeframe      String
+  id                   Int      @id @default(autoincrement())
+  name                 String
+  symbol               String
+  priceAtDrawn         Decimal  @db.Decimal(18, 8)
+  createdAt            DateTime @default(now())
+  priceAtContest       Decimal  @db.Decimal(18, 8)
+  percentageDifference Decimal  @db.Decimal(18, 8)
+  lastModified         DateTime @updatedAt
+  category             String
+  timeframe            String
 }
 
 model Account {

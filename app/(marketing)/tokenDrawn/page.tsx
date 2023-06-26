@@ -1,7 +1,6 @@
 import { Metadata } from "next"
 import { Coins, DollarSign, TrendingDown, TrendingUp } from "lucide-react"
 
-
 import { TokenDrawns, db } from "@/lib/db"
 import getYearWeekString from "@/utils/getYearWeekString"
 import {
@@ -69,7 +68,11 @@ export default async function DashboardPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">
-                      ${currentBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      $
+                      {currentBalance.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </div>
                     <p className="text-xs text-muted-foreground"></p>
                   </CardContent>
@@ -125,7 +128,11 @@ export default async function DashboardPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">
-                      ${allTimeProfit.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      $
+                      {allTimeProfit.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                     </div>
                     <p className="text-xs text-muted-foreground"></p>
                   </CardContent>
