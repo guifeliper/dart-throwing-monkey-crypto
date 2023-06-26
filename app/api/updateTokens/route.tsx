@@ -35,6 +35,10 @@ export async function GET() {
       return updateTokenDrawn(token, price)
     })
   )
+    .then(() => {
+      console.log("Updated the items")
+    })
+    .catch((err) => console.error("Some error on updating", err))
 
   return NextResponse.json({ message: "Updated Successfully" }, { status: 200 })
 }
@@ -43,6 +47,7 @@ async function getCurrentTokenList(tokensToUpdate: TokenDrawn[]) {
   try {
     const tokens = tokensToUpdate?.map((token) => token.symbol)
     const tokensString = tokens.join(",")
+    console.log(tokensString)
     const url =
       `${process.env.COINMARKETCAP_URL}/v1/cryptocurrency/quotes/latest?symbol=${tokensString}` ??
       ""
