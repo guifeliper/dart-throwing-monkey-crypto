@@ -29,7 +29,7 @@ export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
         await prisma.$queryRaw`SELECT   category,   timeframe,   AVG((priceAtContest - priceAtDrawn) / priceAtDrawn * 100) AS percentage_difference FROM   TokenDrawn WHERE priceAtContest <> 0 and category = 'Top-100' GROUP BY   category,   timeframe;`
 
       const result = percentages.reduce((accumulator, item) => {
-        return accumulator * (1 + (item.percentage_difference / 100))
+        return accumulator * (1 + item.percentage_difference / 100)
       }, initialValue)
       return result
     },
@@ -74,8 +74,8 @@ export function TokenDrawns(prismaTokens: PrismaClient["tokenDrawn"]) {
 
       return percentageByGroup.map((item) => ({
         ...item,
-        monkey: item.monkey.toFixed(2),
-        bitcoin: item.bitcoin.toFixed(2),
+        monkey: item.monkey?.toFixed(2),
+        bitcoin: item.bitcoin?.toFixed(2),
       }))
     },
   })
