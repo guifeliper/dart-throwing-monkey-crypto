@@ -9,9 +9,9 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "Token Drawn",
+      title: "Portfolio",
       href: "/dashboard",
-      icon: "clover",
+      icon: "pieChart",
     },
   ],
 }

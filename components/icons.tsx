@@ -25,7 +25,7 @@ import {
   User,
   X,
   type Icon as LucideIcon,
-  BitcoinIcon,
+  PieChart,
   Home,
   Clover,
 } from "lucide-react"
@@ -54,6 +54,7 @@ export const Icons = {
   sun: SunMedium,
   moon: Moon,
   laptop: Laptop,
+  pieChart: PieChart,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
     aria-hidden="true"
