@@ -32,9 +32,7 @@ export default function LoginPage() {
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Continue with:
-          </p>
+          <p className="text-sm text-muted-foreground">Continue with:</p>
         </div>
         <UserAuthForm />
         <p className="px-8 text-center text-sm text-muted-foreground">

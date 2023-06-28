@@ -32,7 +32,6 @@ const CustomTooltip = ({ active, payload, label }) => {
             </p>
           </div>
         ))}
-
       </div>
     )
   }
