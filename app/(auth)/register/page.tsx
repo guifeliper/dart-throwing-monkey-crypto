@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
-import { env } from "@/env.mjs"
+import nachelleNocomUnsplash from "@/assets/images/nachelle-nocom-unsplash.jpg"
 
 export const metadata = {
   title: "Create an account",
   description: "Create an account to get started.",
   openGraph: {
-    images: "/patrick-weissenberger.jpg",
+    images: "/nachelle-nocom-unsplash.jpg",
   },
 }
 
@@ -27,15 +27,7 @@ export default function RegisterPage() {
       >
         Login
       </Link>
-      <div className="hidden h-full bg-muted lg:block">
-        <Image
-          src="/assets/patrick-weissenberger.jpg"
-          width={1280}
-          height={843}
-          alt="Authentication"
-          className="block dark:hidden"
-        />
-      </div>
+      <div className="hidden h-full bg-muted lg:block"></div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
           <div className="flex flex-col space-y-2 text-center">
@@ -44,7 +36,7 @@ export default function RegisterPage() {
               Create an account
             </h1>
             <p className="text-sm text-muted-foreground">
-              Enter your email below to create your account
+              Easy register using the following sign up:
             </p>
           </div>
           <UserAuthForm />
