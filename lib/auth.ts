@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        session.user = session.user || {}; // Ensure session.user is defined
+        session.user = session.user || {} // Ensure session.user is defined
 
         // @ts-ignore
         session.user.id = token.id

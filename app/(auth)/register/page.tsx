@@ -10,9 +10,6 @@ import nachelleNocomUnsplash from "@/assets/images/nachelle-nocom-unsplash.jpg"
 export const metadata = {
   title: "Create an account",
   description: "Create an account to get started.",
-  openGraph: {
-    images: "/nachelle-nocom-unsplash.jpg",
-  },
 }
 
 export default function RegisterPage() {
