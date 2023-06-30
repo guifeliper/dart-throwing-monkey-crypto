@@ -1,7 +1,7 @@
 import getYearWeekString from "@/utils/getYearWeekString"
 import { TokenDrawn } from "@prisma/client"
 import { NextResponse } from "next/server"
-import prisma from "@/lib/prisma"
+import { db } from "@/lib/db"
 interface TokenPrice {
   name: any
   symbol: any
@@ -32,7 +32,11 @@ export async function GET() {
           tokenPrice.symbol.toLocaleLowerCase() ==
           token.symbol.toLocaleLowerCase()
       )?.price
-      return updateTokenDrawn(token, price)
+
+      const percentageDifference =
+        ((price - Number(token.priceAtDrawn)) / Number(token.priceAtDrawn)) *
+        100
+      return updateTokenDrawn(token, price, percentageDifference)
     })
   )
     .then(() => {
@@ -47,7 +51,7 @@ async function getCurrentTokenList(tokensToUpdate: TokenDrawn[]) {
   try {
     const tokens = tokensToUpdate?.map((token) => token.symbol)
     const tokensString = tokens.join(",")
-    console.log(tokensString)
+
     const url =
       `${process.env.COINMARKETCAP_URL}/v1/cryptocurrency/quotes/latest?symbol=${tokensString}` ??
       ""
@@ -81,14 +85,19 @@ async function getCurrentTokenList(tokensToUpdate: TokenDrawn[]) {
   }
 }
 
-async function updateTokenDrawn(data: TokenDrawn, newPrice: number) {
+async function updateTokenDrawn(
+  data: TokenDrawn,
+  newPrice: number,
+  percentageDifference: number
+) {
   try {
-    return await prisma.tokenDrawn.update({
+    return await db.tokenDrawn.update({
       where: {
         id: data.id,
       },
       data: {
         priceAtContest: newPrice,
+        percentageDifference: percentageDifference,
       },
     })
   } catch (error) {
@@ -103,7 +112,7 @@ async function updateTokenDrawn(data: TokenDrawn, newPrice: number) {
 async function getTokenDrawn() {
   try {
     const getCurrentWeek = getYearWeekString()
-    const result = await prisma.tokenDrawn.findMany({
+    const result = await db.tokenDrawn.findMany({
       where: {
         timeframe: getCurrentWeek,
       },
