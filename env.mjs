@@ -12,6 +12,10 @@ export const env = createEnv({
     DATABASE_URL: z.string().min(1),
     COINMARKETCAP_URL: z.string().min(1),
     COINMARKETCAP_API: z.string().min(1),
+    SMTP_FROM: z.string().min(1),
+    MAILSENDER_API_TOKEN: z.string().min(1),
+    MAILSENDER_SIGN_IN_TEMPLATE: z.string().min(1),
+    MAILSENDER_ACTIVATION_TEMPLATE: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.string().min(1),
@@ -25,5 +29,9 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     COINMARKETCAP_URL: process.env.COINMARKETCAP_URL,
     COINMARKETCAP_API: process.env.COINMARKETCAP_API,
+    SMTP_FROM: process.env.SMTP_FROM,
+    MAILSENDER_API_TOKEN: process.env.MAILSENDER_API_TOKEN,
+    MAILSENDER_SIGN_IN_TEMPLATE: process.env.MAILSENDER_SIGN_IN_TEMPLATE,
+    MAILSENDER_ACTIVATION_TEMPLATE: process.env.MAILSENDER_ACTIVATION_TEMPLATE,
   },
 })
