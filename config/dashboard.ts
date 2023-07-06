@@ -13,5 +13,10 @@ export const dashboardConfig: DashboardConfig = {
       href: "/dashboard",
       icon: "pieChart",
     },
+    {
+      title: "Billing",
+      href: "/dashboard/billing",
+      icon: "billing",
+    },
   ],
 }
