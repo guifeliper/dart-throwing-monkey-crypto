@@ -2,8 +2,7 @@
 
 import * as React from "react"
 
-import { UserSubscriptionPlan } from "types"
-import { cn, formatDate } from "@/lib/utils"
+import { Icons } from "@/components/icons"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -14,7 +13,8 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn, formatDate } from "@/lib/utils"
+import { UserSubscriptionPlan } from "types"
 
 interface BillingFormProps extends React.HTMLAttributes<HTMLFormElement> {
   subscriptionPlan: UserSubscriptionPlan & {
@@ -37,6 +37,7 @@ export function BillingForm({
     const response = await fetch("/api/users/stripe")
 
     if (!response?.ok) {
+      setIsLoading(false)
       return toast({
         title: "Something went wrong.",
         description: "Please refresh the page and try again.",

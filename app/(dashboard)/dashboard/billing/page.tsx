@@ -7,7 +7,6 @@ import { DashboardShell } from "@/components/shell"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { siteConfig } from "@/config/site"
 import { authOptions } from "@/lib/auth"
-import { lemonsqueezy } from "@/lib/lemonsqueezy"
 import { getCurrentUser } from "@/lib/session"
 import { stripe } from "@/lib/stripe"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
@@ -24,9 +23,8 @@ export default async function BillingPage() {
   }
 
   const subscriptionPlan = await getUserSubscriptionPlan(user?.id)
-  const test = await lemonsqueezy.updateSubscription()
-  console.log("listAllSubscriptions", test)
 
+  // console.log(subscriptionPlan)
   // If user has a pro plan, check cancel status on Stripe.
   let isCanceled = false
   if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
