@@ -1,16 +1,11 @@
 import { z } from "zod"
 
-import { env } from "@/env.mjs"
 import { authOptions } from "@/lib/auth"
 import { createCheckoutLink } from "@/lib/create-checkout-link"
-import { absoluteUrl } from "@/lib/utils"
 import { getServerSession } from "next-auth"
-
-const billingUrl = absoluteUrl("/dashboard/billing")
 
 export async function GET(req: Request) {
   try {
-    console.log("I have been called")
     const session = await getServerSession(authOptions)
 
     if (!session?.user || !session?.user.email) {
@@ -19,14 +14,6 @@ export async function GET(req: Request) {
 
     //const subscriptionPlan = await getUserSubscriptionPlan(session.user.id)
 
-    // const checkoutOptions = {
-    //   custom_price: 3,
-    //   store: "harv",
-    //   variant: "98599",
-    // }
-    // const newCheckout = await lemonsqueezy.createCheckout(checkoutOptions)
-
-    // console.log(newCheckout)
     // // // The user is on the pro plan.
     // // // Create a portal session to manage subscription.
     // // if (subscriptionPlan.isPro && subscriptionPlan.stripeCustomerId) {
@@ -40,8 +27,7 @@ export async function GET(req: Request) {
 
     // // The user is on the free plan.
     // // Create a checkout session to upgrade.
-    const lemonSqueezySession = createCheckoutLink({
-      variantId: env.LEMON_SQUEEZY_BASIC_MONTHLY_PLAN_ID,
+    const lemonSqueezySession = await createCheckoutLink({
       user: session?.user,
     })
 
