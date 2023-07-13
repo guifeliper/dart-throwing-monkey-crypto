@@ -15,7 +15,7 @@ model TokenDrawn {
   priceAtDrawn         Decimal  @db.Decimal(18, 8)
   createdAt            DateTime @default(now())
   priceAtContest       Decimal  @db.Decimal(18, 8)
-  percentageDifference Decimal?  @db.Decimal(18, 8) @default(0)
+  percentageDifference Decimal? @default(0) @db.Decimal(18, 8)
   lastModified         DateTime @updatedAt
   category             String
   timeframe            String

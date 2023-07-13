@@ -7,6 +7,7 @@ import { headers } from "next/headers"
 enum LemonSqueezyWebhooksEvents {
   SubscriptionCreated = "subscription_created",
   SubscriptionUpdated = "subscription_updated",
+  SubscriptionCancelled = "subscription_cancelled",
 }
 
 export async function POST(req: Request, res: NextApiResponse) {
@@ -29,7 +30,10 @@ export async function POST(req: Request, res: NextApiResponse) {
   }
   const bodyParsed = JSON.parse(body) as SubscriptionWebhookResponse
 
-  if (event === LemonSqueezyWebhooksEvents.SubscriptionCreated) {
+  if (
+    event === LemonSqueezyWebhooksEvents.SubscriptionCreated ||
+    event === LemonSqueezyWebhooksEvents.SubscriptionUpdated
+  ) {
     // Update the user stripe into in our database.
     // Since this is the initial subscription, we need to update
     // the subscription id and customer id.
@@ -45,26 +49,6 @@ export async function POST(req: Request, res: NextApiResponse) {
       },
     })
   }
-
-  // if (event.type === "invoice.payment_succeeded") {
-  //   // Retrieve the subscription details from Stripe.
-  //   const subscription = await stripe.subscriptions.retrieve(
-  //     session.subscription as string
-  //   )
-
-  //   // Update the price id and set the new period end.
-  //   await db.user.update({
-  //     where: {
-  //       stripeSubscriptionId: subscription.id,
-  //     },
-  //     data: {
-  //       stripePriceId: subscription.items.data[0].price.id,
-  //       stripeCurrentPeriodEnd: new Date(
-  //         subscription.current_period_end * 1000
-  //       ),
-  //     },
-  //   })
-  // }
 
   return new Response(null, { status: 200 })
 }
