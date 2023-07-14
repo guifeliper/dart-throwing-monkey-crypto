@@ -15,7 +15,7 @@ model TokenDrawn {
   priceAtDrawn         Decimal  @db.Decimal(18, 8)
   createdAt            DateTime @default(now())
   priceAtContest       Decimal  @db.Decimal(18, 8)
-  percentageDifference Decimal?  @db.Decimal(18, 8) @default(0)
+  percentageDifference Decimal? @default(0) @db.Decimal(18, 8)
   lastModified         DateTime @updatedAt
   category             String
   timeframe            String
@@ -69,6 +69,7 @@ model User {
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
   stripePriceId          String?   @map(name: "stripe_price_id")
   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
+  stripeCancelled        Boolean?  @map(name: "stripe_cancelled")
 
   @@map(name: "users")
 }
