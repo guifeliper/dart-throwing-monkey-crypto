@@ -46,6 +46,7 @@ export async function POST(req: Request, res: NextApiResponse) {
         stripeCustomerId: bodyParsed.data.attributes.customer_id.toString(),
         stripePriceId: bodyParsed.data.attributes.variant_id.toString(),
         stripeCurrentPeriodEnd: new Date(bodyParsed.data.attributes.renews_at),
+        stripeCancelled: bodyParsed.data.attributes.cancelled,
       },
     })
   }

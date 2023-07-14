@@ -28,6 +28,7 @@ export function BillingForm({
   ...props
 }: BillingFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [isCancelLoading, setCancelIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(event) {
     event.preventDefault()
@@ -54,8 +55,34 @@ export function BillingForm({
     }
   }
 
+  async function onCancel(event) {
+    event.preventDefault()
+    setCancelIsLoading(!isCancelLoading)
+
+    // Get a Stripe session URL.
+    const response = await fetch("/api/users/subscription/cancel")
+
+    if (!response?.ok) {
+      setIsLoading(false)
+      return toast({
+        title: "Something went wrong.",
+        description: "Please refresh the page and try again.",
+        variant: "destructive",
+      })
+    }
+
+    const session = await response.json()
+    if (session) {
+      window.location.href = session.url
+    }
+  }
   return (
-    <form className={cn(className)} onSubmit={onSubmit} {...props}>
+    <form
+      className={cn(className)}
+      onSubmit={onSubmit}
+      onReset={onCancel}
+      {...props}
+    >
       <Card>
         <CardHeader>
           <CardTitle>Subscription Plan</CardTitle>
@@ -66,16 +93,32 @@ export function BillingForm({
         </CardHeader>
         <CardContent>{subscriptionPlan.description}</CardContent>
         <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
-          <button
-            type="submit"
-            className={cn(buttonVariants())}
-            disabled={isLoading}
-          >
-            {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+          <div className="flex justify-between space-x-2">
+            <button
+              type="submit"
+              className={cn(buttonVariants())}
+              disabled={isLoading}
+            >
+              {isLoading && (
+                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              {subscriptionPlan.isPro
+                ? "Manage Subscription"
+                : "Upgrade to PRO"}
+            </button>
+            {subscriptionPlan.isPro && (
+              <button
+                type="reset"
+                className={cn(buttonVariants({ variant: "destructive" }))}
+                disabled={isCancelLoading || subscriptionPlan.isCanceled}
+              >
+                {isCancelLoading && (
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                )}
+                Cancel subscription
+              </button>
             )}
-            {subscriptionPlan.isPro ? "Manage Subscription" : "Upgrade to PRO"}
-          </button>
+          </div>
           {subscriptionPlan.isPro ? (
             <p className="rounded-full text-xs font-medium">
               {subscriptionPlan.isCanceled

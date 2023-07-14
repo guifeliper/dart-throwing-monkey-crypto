@@ -1,10 +1,8 @@
 import { z } from "zod"
 
 import { authOptions } from "@/lib/auth"
-import { createCheckoutLink } from "@/lib/create-checkout-link"
 import { getLemonSqueezyClient } from "@/lib/lemon-squeezy"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
-import { RetrieveSubscriptionResult } from "@/types/lemon-squeezy"
 import { getServerSession } from "next-auth"
 
 export async function GET(req: Request) {
@@ -16,33 +14,24 @@ export async function GET(req: Request) {
     }
 
     const subscriptionPlan = await getUserSubscriptionPlan(session.user.id)
-    const lemonSqueezyClient = getLemonSqueezyClient()
     // The user is on the pro plan.
     // Create a portal session to manage subscription.
     if (subscriptionPlan.isPro && subscriptionPlan.stripeCustomerId) {
+      const lemonSqueezyClient = getLemonSqueezyClient()
       const path = `v1/subscriptions/${subscriptionPlan.stripeSubscriptionId}`
-      const subscriptionResult =
-        await lemonSqueezyClient.request<RetrieveSubscriptionResult>({
-          path,
-          method: "GET",
-        })
+      await lemonSqueezyClient.request({
+        path,
+        method: "DELETE",
+      })
+
       return new Response(
         JSON.stringify({
-          url: subscriptionResult.data.attributes.urls.update_payment_method,
+          url: "/dashboard/billing",
         })
       )
     }
-    // // The user is on the free plan.
-    // // Create a checkout session to upgrade.
-    const lemonSqueezySession = await createCheckoutLink({
-      user: session?.user,
-    })
 
-    return new Response(
-      JSON.stringify({
-        url: lemonSqueezySession,
-      })
-    )
+    return new Response(null, { status: 200 })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })

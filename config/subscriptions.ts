@@ -17,6 +17,6 @@ export const BasicPlan: SubscriptionPlan = {
 export const proPlan: SubscriptionPlan = {
   name: "Professional",
   description:
-    "The Professional plan has unlimited posts and Telegram management pies.",
+    "The Professional plan has unlimited investment pies and Telegram sharing management.",
   stripePriceId: env.LEMON_SQUEEZY_PRO_MONTHLY_PLAN_ID || "",
 }

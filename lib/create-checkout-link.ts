@@ -31,13 +31,13 @@ export async function createCheckoutLink({
         store: {
           data: {
             type: "stores",
-            id: "34368",
+            id: env.LEMON_SQUEEZY_STORE_ID,
           },
         },
         variant: {
           data: {
             type: "variants",
-            id: `97194`,
+            id: env.LEMON_SQUEEZY_BASIC_MONTHLY_PLAN_ID,
           },
         },
       },

@@ -1,6 +1,6 @@
 // @ts-nocheck
 // TODO: Fix this when we turn strict mode on.
-import { freePlan, proPlan } from "@/config/subscriptions"
+import { BasicPlan, freePlan } from "@/config/subscriptions"
 import { db } from "@/lib/db"
 import { UserSubscriptionPlan } from "types"
 
@@ -16,6 +16,7 @@ export async function getUserSubscriptionPlan(
       stripeCurrentPeriodEnd: true,
       stripeCustomerId: true,
       stripePriceId: true,
+      stripeCancelled: true,
     },
   })
 
@@ -28,7 +29,7 @@ export async function getUserSubscriptionPlan(
     user.stripePriceId &&
     user.stripeCurrentPeriodEnd?.getTime() + 86_400_000 > Date.now()
 
-  const plan = isPro ? proPlan : freePlan
+  const plan = isPro ? BasicPlan : freePlan
 
   return {
     ...plan,

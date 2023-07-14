@@ -13,6 +13,7 @@ export const env = createEnv({
     COINMARKETCAP_URL: z.string().min(1),
     COINMARKETCAP_API: z.string().min(1),
     LEMON_SQUEEZY_API_KEY: z.string().min(1),
+    LEMON_SQUEEZY_STORE_ID: z.string().min(1),
     LEMON_SQUEEZY_BASIC_MONTHLY_PLAN_ID: z.string().min(1),
     LEMON_SQUEEZY_PRO_MONTHLY_PLAN_ID: z.string().min(1),
   },
@@ -29,6 +30,7 @@ export const env = createEnv({
     COINMARKETCAP_URL: process.env.COINMARKETCAP_URL,
     COINMARKETCAP_API: process.env.COINMARKETCAP_API,
     LEMON_SQUEEZY_API_KEY: process.env.LEMON_SQUEEZY_API_KEY,
+    LEMON_SQUEEZY_STORE_ID: process.env.LEMON_SQUEEZY_STORE_ID,
     LEMON_SQUEEZY_BASIC_MONTHLY_PLAN_ID:
       process.env.LEMON_SQUEEZY_BASIC_MONTHLY_PLAN_ID,
     LEMON_SQUEEZY_PRO_MONTHLY_PLAN_ID:
