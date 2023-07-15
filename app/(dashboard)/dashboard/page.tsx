@@ -1,7 +1,4 @@
-import { redirect } from "next/navigation"
-
 import { DashboardHeader } from "@/components/header"
-import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 
 export const metadata = {
@@ -11,9 +8,9 @@ export const metadata = {
 export default async function DashboardPage() {
   const user = await getCurrentUser()
 
-  if (!user) {
-    redirect(authOptions?.pages?.signIn || "/login")
-  }
+  // if (!user) {
+  //   redirect(authOptions?.pages?.signIn || "/login")
+  // }
 
   return (
     <div>
