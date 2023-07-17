@@ -5,16 +5,19 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
+  Clover,
   CreditCard,
   File,
   FileText,
   HelpCircle,
+  Home,
   Image,
   Laptop,
   Loader2,
   LucideProps,
   Moon,
   MoreVertical,
+  PieChart,
   Pizza,
   Plus,
   Settings,
@@ -23,13 +26,8 @@ import {
   Twitter,
   User,
   X,
-  type Icon as LucideIcon,
-  PieChart,
-  Home,
-  Clover,
 } from "lucide-react"
 
-export type Icon = LucideIcon
 
 export const Icons = {
   logo: Logo,
