@@ -1,36 +1,70 @@
-import createMiddleware from "next-intl/middleware"
+import { getToken } from "next-auth/jwt"
+import { withAuth } from "next-auth/middleware"
+import createIntlMiddleware from "next-intl/middleware"
+import { NextRequest, NextResponse } from "next/server"
 
-export default createMiddleware({
-  // A list of all locales that are supported
-  locales: ["en", "pt"],
+const locales = ["en", "pt"]
+const publicPages = ["/", "/login", "/register", "/dashboard", "/pricing"]
 
-  // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
+const intlMiddleware = createIntlMiddleware({
+  locales,
   defaultLocale: "en",
 })
 
-export const config = {
-  // Skip all paths that should not be internationalized. This example skips the
-  // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+const authMiddleware = withAuth(
+  // Note that this callback is only invoked if
+  // the `authorized` callback has returned `true`
+  // and not for pages listed in `pages`.
+  async function onSuccess(req) {
+    const token = await getToken({ req })
+    const isAuth = !!token
+    const isAuthPage =
+      req.nextUrl.pathname.startsWith("/login") ||
+      req.nextUrl.pathname.startsWith("/register")
+
+    if (isAuthPage) {
+      if (isAuth) {
+        return NextResponse.redirect(new URL("/dashboard", req.url))
+      }
+
+      return intlMiddleware(req)
+    }
+
+    if (!isAuth) {
+      let from = req.nextUrl.pathname
+      if (req.nextUrl.search) {
+        from += req.nextUrl.search
+      }
+
+      return NextResponse.redirect(
+        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+      )
+    }
+  },
+  {
+    callbacks: {
+      authorized: () => true,
+    },
+    pages: {
+      signIn: "/login",
+    },
+  }
+)
+
+export default function middleware(req: NextRequest) {
+  const publicPathnameRegex = RegExp(
+    `^(/(${locales.join("|")}))?(${publicPages.join("|")})?/?$`,
+    "i"
+  )
+  const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname)
+
+  if (isPublicPage) {
+    return intlMiddleware(req)
+  } else {
+    return (authMiddleware as any)(req)
+  }
 }
 
-// import { withAuth } from "next-auth/middleware"
-// import { withAuthPath } from "./middlewares/withAuthPath"
-// import { withLogging } from "./middlewares/withLogging"
-
-// const middlewares = withLogging(withAuthPath)
-
-// export default withAuth(middlewares, {
-//   callbacks: {
-//     async authorized() {
-//       // This is a work-around for handling redirect on auth pages.
-//       // We return true here so that the middleware function above
-//       // is always called.
-//       return true
-//     },
-//   },
-// })
-
-// export const config = {
-//   matcher: ["/dashboard/billing", "/login", "/register"],
-// }
+export const config = {
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
+}
