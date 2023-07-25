@@ -1,5 +1,23 @@
 {
   "Index": {
     "title": "Olá mundo!"
+  },
+  "Dashboard": {
+    "portfolio": "Portfólio",
+    "manage-portfolio": "Gerencie seu próprio Portfólio"
+  },
+  "Dashboard-Billing": {
+    "billing": "Faturamento",
+    "manage-billing": "Gerencie seu faturamento e seu plano de assinatura.",
+    "alert-title": "Este é um aplicativo de demonstração.",
+    "alert-description": "O aplicativo {name} é um aplicativo de demonstração que utiliza um ambiente de teste do Stripe. Você pode encontrar uma lista de números de cartão de teste na ",
+    "payment-docs": "documentação do Stripe",
+    "subscription-title": "Plano de assinatura",
+    "current-subscription": "Você está atualmente no plano <strong>{subscriptionPlan}</strong>.",
+    "manage-subscription": "Gerenciar assinatura",
+    "upgrade-subscription": "Atualizar para PRO",
+    "cancel-subscription": "Cancelar assinatura",
+    "canceled-date": "Seu plano será cancelado em ",
+    "renew-date": "Seu plano renova em "
   }
 }

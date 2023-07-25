@@ -1,22 +1,18 @@
 import { DashboardHeader } from "@/components/header"
-import { getCurrentUser } from "@/lib/session"
+import { useTranslations } from "next-intl"
 
 export const metadata = {
   title: "Dashboard",
 }
 
-export default async function DashboardPage() {
-  const user = await getCurrentUser()
-
-  // if (!user) {
-  //   redirect(authOptions?.pages?.signIn || "/login")
-  // }
+export default function DashboardPage() {
+  const t = useTranslations("Dashboard")
 
   return (
     <div>
       <DashboardHeader
-        heading="Portfolio"
-        text="Manage your own Portfolio"
+        heading={t("portfolio")}
+        text={t("manage-portfolio")}
       ></DashboardHeader>
     </div>
   )

@@ -1,5 +1,23 @@
 {
   "Index": {
     "title": "Hello world!"
+  },
+  "Dashboard": {
+    "portfolio": "Portfolio",
+    "manage-portfolio": "Manage your own Portfolio"
+  },
+  "Dashboard-Billing": {
+    "billing": "Billing",
+    "manage-billing": "Manage billing and your subscription plan.",
+    "alert-title": "This is a demo app.",
+    "alert-description": "{name} app is a demo app using a Stripe test environment. You can find a list of test card numbers on the ",
+    "payment-docs": "Stripe docs",
+    "subscription-title": "Subscription Plan",
+    "current-subscription": "You are currently on the <strong>{subscriptionPlan}</strong>plan.",
+    "manage-subscription": "Manage Subscription",
+    "upgrade-subscription": "Upgrade to PRO",
+    "cancel-subscription": "Cancel subscription",
+    "canceled-date": "Your plan will be canceled on ",
+    "renew-date": "Your plan renews on "
   }
 }

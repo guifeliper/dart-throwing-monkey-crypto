@@ -1,12 +1,15 @@
 import { DashboardHeader } from "@/components/header"
 import { DashboardShell } from "@/components/shell"
+import { useTranslations } from "next-intl"
 
 export default function DashboardLoading() {
+  const t = useTranslations("Dashboard")
+
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Portfolio"
-        text="Manage your own Portfolio"
+        heading={t("portfolio")}
+        text={t("manage-portfolio")}
       ></DashboardHeader>
     </DashboardShell>
   )
