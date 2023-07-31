@@ -1,10 +1,12 @@
 import Link from "next/link"
 
+import { getMessages } from "@/components/get-messages"
 import { MainNav } from "@/components/main-nav"
 import { SiteFooter } from "@/components/site-footer"
 import { buttonVariants } from "@/components/ui/button"
 import { marketingConfig } from "@/config/marketing"
 import { cn } from "@/lib/utils"
+import { NextIntlClientProvider } from "next-intl"
 import { getTranslator } from "next-intl/server"
 
 interface MarketingLayoutProps {
@@ -17,11 +19,15 @@ export default async function MarketingLayout({
   params,
 }: MarketingLayoutProps) {
   const t = await getTranslator(params.locale ?? "en", "Marketing")
+  let messages = await getMessages(params.locale ?? "en")
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="container z-40 bg-background">
         <div className="flex h-20 items-center justify-between py-6">
-          <MainNav items={marketingConfig.mainNav} />
+          <NextIntlClientProvider locale={params.locale} messages={messages}>
+            <MainNav items={marketingConfig.mainNav} />
+          </NextIntlClientProvider>
           <nav>
             <Link
               href="/dashboard"

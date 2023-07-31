@@ -2,8 +2,18 @@ import { User } from "@prisma/client"
 
 import { Icons } from "@/components/icons"
 
+//Need improvement on Typescript
+//it should get it automatically from the file
+type MenuTypes =
+  | "tokenDrawn"
+  | "pricing"
+  | "features"
+  | "login"
+  | "openApp"
+  | "menu"
+
 export type NavItem = {
-  title: string
+  title: MenuTypes
   href: string
   disabled?: boolean
 }

@@ -43,7 +43,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 item.disabled && "cursor-not-allowed opacity-80"
               )}
             >
-              {item.title}
+              {t(`${item.title}`)}
             </Link>
           ))}
         </nav>
@@ -53,7 +53,7 @@ export function MainNav({ items, children }: MainNavProps) {
         onClick={() => setShowMobileMenu(!showMobileMenu)}
       >
         {showMobileMenu ? <Icons.close /> : <Icons.logo className="h-6 w-6" />}
-        <span className="font-bold">{t("menu")}</span>
+        <span className="font-bold">{"menu"}</span>
       </button>
       {showMobileMenu && items && (
         <MobileNav items={items}>{children}</MobileNav>
