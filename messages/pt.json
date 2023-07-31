@@ -35,33 +35,36 @@
   },
   "Dashboard-Billing": {
     "billing": "Faturamento",
-    "manage-billing": "Gerencie seu faturamento e seu plano de assinatura.",
+    "manage-billing": "Gerencie a cobrança e seu plano de assinatura.",
     "alert-title": "Este é um aplicativo de demonstração.",
-    "alert-description": "O aplicativo {name} é um aplicativo de demonstração que utiliza um ambiente de teste do Stripe. Você pode encontrar uma lista de números de cartão de teste na ",
-    "payment-docs": "documentação do Stripe",
+    "alert-description": "O aplicativo {name} é um aplicativo de demonstração usando um ambiente de teste do Stripe. Você pode encontrar uma lista de números de cartão de teste no ",
+    "payment-docs": "documentos do Stripe",
     "subscription-title": "Plano de assinatura",
     "current-subscription": "Você está atualmente no plano <strong>{subscriptionPlan}</strong>.",
     "manage-subscription": "Gerenciar assinatura",
-    "upgrade-subscription": "Atualizar para PRO",
+    "upgrade-subscription": "Atualize para PRO",
     "cancel-subscription": "Cancelar assinatura",
     "canceled-date": "Seu plano será cancelado em ",
-    "renew-date": "Seu plano renova em "
+    "renew-date": "Seu plano renova em ",
+    "free-plan": "O plano gratuito é limitado a 3 fatias de investimento. Atualize para o plano Básico para ter fatias de auto investimento ilimitadas.",
+    "basic-plan": "O plano Básico tem fatias de investimento ilimitadas.",
+    "pro-plan": "O plano Profissional tem fatias de investimento ilimitadas e gerenciamento de compartilhamento no Telegram."
   },
   "TokenDrawn": {
     "overview": "Visão Geral",
-    "currentBalance": "Saldo Atual",
-    "bestPerformer": "Melhor Desempenho",
-    "worstPerformer": "Pior Desempenho",
-    "allTimeProfit": "Lucro Total",
-    "currentTokens": "Tokens Atuais",
-    "selectedWeekTokens": "Tokens selecionados da semana"
+    "current-balance": "Saldo Atual",
+    "best-performer": "Melhor Desempenho",
+    "worst-performer": "Pior Desempenho",
+    "all-time-profit": "Lucro Total",
+    "current-tokens": "Tokens Atuais",
+    "selected-week-tokens": "Tokens selecionados da semana"
   },
   "MainNavigation": {
-    "tokenDrawn": "Token Drawn",
-    "pricing": "Pricing",
-    "features": "Features",
+    "tokenDrawn": "Seleção de Tokens",
+    "pricing": "Preços",
+    "features": "Recursos",
     "login": "Login",
-    "openApp": "Open App",
+    "openApp": "Abrir aplicativo",
     "menu": "Menu"
   }
 }

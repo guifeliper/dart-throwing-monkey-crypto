@@ -1,5 +1,6 @@
 import Link from "next/link"
 
+import { getMessages } from "@/components/get-messages"
 import { MainNav } from "@/components/main-nav"
 import { DashboardNav } from "@/components/nav"
 import { SiteFooter } from "@/components/site-footer"
@@ -8,21 +9,29 @@ import { UserAccountNav } from "@/components/user-account-nav"
 import { dashboardConfig } from "@/config/dashboard"
 import { getCurrentUser } from "@/lib/session"
 import { cn } from "@/lib/utils"
+import { NextIntlClientProvider } from "next-intl"
 
 interface DashboardLayoutProps {
   children?: React.ReactNode
+  params: {
+    locale: string
+  }
 }
 
 export default async function DashboardLayout({
   children,
+  params: { locale },
 }: DashboardLayoutProps) {
   const user = await getCurrentUser()
+  let messages = await getMessages(locale ?? "en")
 
   return (
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex h-16 items-center justify-between py-4">
-          <MainNav items={dashboardConfig.mainNav} />
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <MainNav items={dashboardConfig.mainNav} />
+          </NextIntlClientProvider>
           {user && (
             <UserAccountNav
               user={{

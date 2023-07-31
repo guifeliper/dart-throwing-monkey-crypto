@@ -45,16 +45,19 @@
     "upgrade-subscription": "Upgrade to PRO",
     "cancel-subscription": "Cancel subscription",
     "canceled-date": "Your plan will be canceled on ",
-    "renew-date": "Your plan renews on "
+    "renew-date": "Your plan renews on ",
+    "free-plan": "The free plan is limited to 3 investiment pie. Upgrade to the Basic plan for unlimited auto investing pie.",
+    "basic-plan": "The Basic plan has unlimited investment pies.",
+    "pro-plan": "The Professional plan has unlimited investment pies and Telegram sharing management."
   },
   "TokenDrawn": {
     "overview": "Overview",
-    "currentBalance": "Current Balance",
-    "bestPerformer": "Best Performer",
-    "worstPerformer": "Worst Performer",
-    "allTimeProfit": "All-time Profit",
-    "currentTokens": "Current Tokens",
-    "selectedWeekTokens": "Selected tokens for this week"
+    "current-balance": "Current Balance",
+    "best-performer": "Best Performer",
+    "worst-performer": "Worst Performer",
+    "all-time-profit": "All-time Profit",
+    "current-tokens": "Current Tokens",
+    "selected-week-tokens": "Selected tokens for this week"
   },
   "MainNavigation": {
     "tokenDrawn": "Token Drawn",
