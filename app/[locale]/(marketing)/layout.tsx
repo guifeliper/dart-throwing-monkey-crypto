@@ -5,14 +5,18 @@ import { SiteFooter } from "@/components/site-footer"
 import { buttonVariants } from "@/components/ui/button"
 import { marketingConfig } from "@/config/marketing"
 import { cn } from "@/lib/utils"
+import { getTranslator } from "next-intl/server"
 
 interface MarketingLayoutProps {
   children: React.ReactNode
+  params: { locale: string }
 }
 
 export default async function MarketingLayout({
   children,
+  params,
 }: MarketingLayoutProps) {
+  const t = await getTranslator(params.locale ?? "en", "Marketing")
   return (
     <div className="flex min-h-screen flex-col">
       <header className="container z-40 bg-background">
@@ -26,7 +30,7 @@ export default async function MarketingLayout({
                 "px-4"
               )}
             >
-              Open App
+              {t("open-app")}
             </Link>
           </nav>
         </div>

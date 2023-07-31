@@ -1,6 +1,33 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "Marketing": {
+    "follow-twitter": "Follow along on twitter",
+    "title": "Open-Source Experiment Tests Crypto with Dart-Throwing Monkey",
+    "subtitle": "Join the Journey: Building an Open-Source Next.js 13 Web App Together",
+    "features": "Features",
+    "features-description": "This project is an experiment to see how a modern app, with features like auth, subscriptions, API routes, and static pages would work in Next.js 13 app dir.",
+    "features-descriptions": {
+      "nextjs": "App dir, Routing, Layouts, Loading UI and API routes.",
+      "react": "Server and Client Components. Use hook.",
+      "database": "ORM using Prisma and deployed on PlanetScale.",
+      "components": "UI components built using Radix UI and styled with Tailwind CSS.",
+      "authentication": "Authentication using NextAuth.js and middlewares.",
+      "subscription": "Free and paid subscriptions using LemonSqueezy."
+    },
+    "open-source": "Proudly Open Source",
+    "open-source-description": "{name} is open source and powered by open source software.<br></br> The code is available on",
+    "open-app": "Open App"
+  },
+  "Pricing": {
+    "title": "Simple, transparent pricing",
+    "description": "Unlock all features including create your own <strong>auto investing pie</strong>.",
+    "included": "What's included in the PRO plan",
+    "pies": "Unlimited Pies",
+    "rebalance": "Rebalance of wallet",
+    "dashboard": "Dashboard Analytics",
+    "support": "Premium Support",
+    "billed-monthly": "Billed Monthly",
+    "started": "Get Started",
+    "alert-description": "{name} is a demo app. <br></br> <strong>You can test the upgrade and won't be charged.</strong>"
   },
   "Dashboard": {
     "portfolio": "Portfolio",
@@ -19,5 +46,22 @@
     "cancel-subscription": "Cancel subscription",
     "canceled-date": "Your plan will be canceled on ",
     "renew-date": "Your plan renews on "
+  },
+  "TokenDrawn": {
+    "overview": "Overview",
+    "currentBalance": "Current Balance",
+    "bestPerformer": "Best Performer",
+    "worstPerformer": "Worst Performer",
+    "allTimeProfit": "All-time Profit",
+    "currentTokens": "Current Tokens",
+    "selectedWeekTokens": "Selected tokens for this week"
+  },
+  "MainNavigation": {
+    "tokenDrawn": "Token Drawn",
+    "pricing": "Pricing",
+    "features": "Features",
+    "login": "Login",
+    "openApp": "Open App",
+    "menu": "Menu"
   }
 }

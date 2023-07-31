@@ -31,6 +31,7 @@
     "cryptocurrency-icons": "^0.18.1",
     "date-fns": "^2.30.0",
     "eslint": "8.45.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.260.0",
     "next": "13.4.10",
     "next-auth": "^4.22.1",

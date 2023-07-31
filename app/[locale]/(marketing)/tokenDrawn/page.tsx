@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { WeekTokenDrawn } from "@/components/week-token-drawn"
 import { TokenDrawns, db } from "@/lib/db"
 import getYearWeekString from "@/utils/getYearWeekString"
+import { getTranslator } from "next-intl/server"
 
 export const metadata: Metadata = {
   title: "Token Drawn",
@@ -24,7 +25,8 @@ export const metadata: Metadata = {
 
 export const revalidate = 86400 // 1 day
 
-export default async function DashboardPage() {
+export default async function DashboardPage({ params }) {
+  const t = await getTranslator(params.locale ?? "en", "TokenDrawn")
   const tokenDrawn = TokenDrawns(db.tokenDrawn)
   const getCurrentWeek = getYearWeekString()
   const currentTokens = await tokenDrawn.findMany({
@@ -52,17 +54,14 @@ export default async function DashboardPage() {
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList>
-              <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="analytics" disabled>
-                Analytics
-              </TabsTrigger>
+              <TabsTrigger value="overview">{t("overview")}</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-4">
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Current Balance
+                      {t("currentBalance")}
                     </CardTitle>
                     <DollarSign className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -80,7 +79,7 @@ export default async function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Best Performer
+                      {t("bestPerformer")}
                     </CardTitle>
                     <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -101,7 +100,7 @@ export default async function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Worst Performer
+                      {t("worstPerformer")}
                     </CardTitle>
                     <TrendingDown className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -122,7 +121,7 @@ export default async function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      All-time profit
+                      {t("allTimeProfit")}
                     </CardTitle>
                     <Coins className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -141,7 +140,7 @@ export default async function DashboardPage() {
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                 <Card className="col-span-5">
                   <CardHeader>
-                    <CardTitle>Overview</CardTitle>
+                    <CardTitle>{t("overview")}</CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2">
                     <TokenDrawnChart data={byGroupData} />
@@ -149,10 +148,8 @@ export default async function DashboardPage() {
                 </Card>
                 <Card className="md:col-span-5 lg:col-span-2">
                   <CardHeader>
-                    <CardTitle>Current Tokens</CardTitle>
-                    <CardDescription>
-                      Selected tokens for this week.
-                    </CardDescription>
+                    <CardTitle>{t("currentTokens")}</CardTitle>
+                    <CardDescription>{t("selectedWeekTokens")}</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <WeekTokenDrawn data={currentTokens} />
