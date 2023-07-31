@@ -61,7 +61,7 @@ export default async function DashboardPage({ params }) {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {t("currentBalance")}
+                      {t("current-balance")}
                     </CardTitle>
                     <DollarSign className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -79,7 +79,7 @@ export default async function DashboardPage({ params }) {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {t("bestPerformer")}
+                      {t("best-performer")}
                     </CardTitle>
                     <TrendingUp className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -100,7 +100,7 @@ export default async function DashboardPage({ params }) {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {t("worstPerformer")}
+                      {t("worst-performer")}
                     </CardTitle>
                     <TrendingDown className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -121,7 +121,7 @@ export default async function DashboardPage({ params }) {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      {t("allTimeProfit")}
+                      {t("all-time-profit")}
                     </CardTitle>
                     <Coins className="h-4 w-4 text-muted-foreground" />
                   </CardHeader>
@@ -148,8 +148,10 @@ export default async function DashboardPage({ params }) {
                 </Card>
                 <Card className="md:col-span-5 lg:col-span-2">
                   <CardHeader>
-                    <CardTitle>{t("currentTokens")}</CardTitle>
-                    <CardDescription>{t("selectedWeekTokens")}</CardDescription>
+                    <CardTitle>{t("current-tokens")}</CardTitle>
+                    <CardDescription>
+                      {t("selected-week-tokens")}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <WeekTokenDrawn data={currentTokens} />
