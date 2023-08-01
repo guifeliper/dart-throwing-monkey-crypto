@@ -9,6 +9,7 @@ import {
   CreditCard,
   File,
   FileText,
+  Globe,
   HelpCircle,
   Home,
   Image,
@@ -27,7 +28,6 @@ import {
   User,
   X,
 } from "lucide-react"
-
 
 export const Icons = {
   logo: Logo,
@@ -73,4 +73,5 @@ export const Icons = {
   check: Check,
   home: Home,
   clover: Clover,
+  globe: Globe,
 }

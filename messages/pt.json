@@ -1,0 +1,84 @@
+{
+  "Marketing": {
+    "follow-twitter": "Siga-nos no Twitter",
+    "title": "Experimento de Código Aberto Testa Crypto com Macaco Lançando Dardos",
+    "subtitle": "Junte-se à Jornada: Construindo Juntos um Aplicativo da Web Next.js 13 de Código Aberto",
+    "features": "Recursos",
+    "features-description": "Este projeto é um experimento para ver como um aplicativo moderno, com recursos como autenticação, assinaturas, rotas API e páginas estáticas, funcionaria em um aplicativo Next.js 13.",
+    "features-descriptions": {
+      "nextjs": "App dir, Roteamento, Layouts, Loading UI e rotas API.",
+      "react": "Componentes do servidor e do cliente. Use hook.",
+      "database": "ORM usando Prisma e implantado no PlanetScale.",
+      "components": "Componentes de interface do usuário construídos usando Radix UI e estilizados com Tailwind CSS.",
+      "authentication": "Autenticação usando NextAuth.js e middlewares.",
+      "subscription": "Assinaturas gratuitas e pagas usando LemonSqueezy."
+    },
+    "open-source": "Orgulhosamente Código Aberto",
+    "open-source-description": "{name} é de código aberto e alimentado por software de código aberto.<br></br> O código está disponível no",
+    "open-app": "Abrir App"
+  },
+  "Pricing": {
+    "title": "Preços simples e transparentes",
+    "description": "Desbloqueie todos os recursos, incluindo criar seu próprio <strong>portfólio de investimentos automáticos</strong>.",
+    "included": "O que está incluído no plano PRO",
+    "pies": "Portfólios ilimitados",
+    "rebalance": "Rebalanceamento da carteira",
+    "dashboard": "Análises do painel",
+    "support": "Suporte premium",
+    "billed-monthly": "Cobrança mensal",
+    "started": "Começar",
+    "alert-description": "{name} é um aplicativo de demonstração.<br></br><strong>Você pode testar o upgrade e não será cobrado.</strong>"
+  },
+  "Dashboard": {
+    "portfolio": "Portfólio",
+    "manage-portfolio": "Gerencie seu próprio Portfólio"
+  },
+  "Dashboard-Billing": {
+    "billing": "Faturamento",
+    "manage-billing": "Gerencie a cobrança e seu plano de assinatura.",
+    "alert-title": "Este é um aplicativo de demonstração.",
+    "alert-description": "O aplicativo {name} é um aplicativo de demonstração usando um ambiente de teste do Stripe. Você pode encontrar uma lista de números de cartão de teste no ",
+    "payment-docs": "documentos do Stripe",
+    "subscription-title": "Plano de assinatura",
+    "current-subscription": "Você está atualmente no plano <strong>{subscriptionPlan}</strong>.",
+    "manage-subscription": "Gerenciar assinatura",
+    "upgrade-subscription": "Atualize para PRO",
+    "cancel-subscription": "Cancelar assinatura",
+    "canceled-date": "Seu plano será cancelado em ",
+    "renew-date": "Seu plano renova em ",
+    "free-plan": "O plano gratuito é limitado a 3 fatias de investimento. Atualize para o plano Básico para ter fatias de auto investimento ilimitadas.",
+    "basic-plan": "O plano Básico tem fatias de investimento ilimitadas.",
+    "pro-plan": "O plano Profissional tem fatias de investimento ilimitadas e gerenciamento de compartilhamento no Telegram."
+  },
+  "TokenDrawn": {
+    "overview": "Visão Geral",
+    "current-balance": "Saldo Atual",
+    "best-performer": "Melhor Desempenho",
+    "worst-performer": "Pior Desempenho",
+    "all-time-profit": "Lucro Total",
+    "current-tokens": "Tokens Atuais",
+    "selected-week-tokens": "Tokens selecionados da semana"
+  },
+  "MainNavigation": {
+    "tokenDrawn": "Seleção de Tokens",
+    "pricing": "Preços",
+    "features": "Recursos",
+    "login": "Login",
+    "openApp": "Abrir aplicativo",
+    "menu": "Menu"
+  },
+  "Login": {
+    "back": "Voltar",
+    "welcome-back": "Bem-vindo de volta!",
+    "login": "Login",
+    "email": "Email",
+    "continue-with": "Continue com",
+    "sign-up-redirect": "Não tem uma conta? Criar uma conta",
+    "create-account": "Criar uma conta",
+    "register-description": "Registro fácil usando a inscrição seguinte:",
+    "terms-description": "Ao clicar em Continuar, você concorda com nossos",
+    "terms": "Termos de Serviço",
+    "privacy": "Política de Privacidade",
+    "and": "e"
+  }
+}

@@ -1,9 +1,10 @@
 import * as React from "react"
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 import { ModeToggle } from "@/components/mode-toggle"
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { LocaleSwitch } from "./locale-switch"
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
@@ -24,7 +25,10 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             .
           </p>
         </div>
-        <ModeToggle />
+        <div className="flex flex-col items-center gap-6 px-8 md:flex-row md:gap-4 md:px-0">
+          <LocaleSwitch />
+          <ModeToggle />
+        </div>
       </div>
     </footer>
   )

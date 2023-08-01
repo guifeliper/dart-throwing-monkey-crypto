@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card"
 import { toast } from "@/components/ui/use-toast"
 import { cn, formatDate } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 import { UserSubscriptionPlan } from "types"
 
 interface BillingFormProps extends React.HTMLAttributes<HTMLFormElement> {
@@ -27,6 +28,7 @@ export function BillingForm({
   className,
   ...props
 }: BillingFormProps) {
+  const t = useTranslations("Dashboard-Billing")
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [isCancelLoading, setCancelIsLoading] = React.useState<boolean>(false)
 
@@ -76,6 +78,21 @@ export function BillingForm({
       window.location.href = session.url
     }
   }
+
+  function getDescription() {
+    let message = ""
+    if (subscriptionPlan.name === "Free") {
+      message = t("free-plan")
+    }
+    if (subscriptionPlan.name == "Basic") {
+      message = t("basic-plan")
+    }
+    if (subscriptionPlan.name == "Pro") {
+      message = t("pro-plan")
+    }
+    return message
+  }
+
   return (
     <form
       className={cn(className)}
@@ -85,13 +102,14 @@ export function BillingForm({
     >
       <Card>
         <CardHeader>
-          <CardTitle>Subscription Plan</CardTitle>
+          <CardTitle>{t("subscription-title")}</CardTitle>
           <CardDescription>
-            You are currently on the <strong>{subscriptionPlan.name}</strong>{" "}
-            plan.
+            {t("subscription-title", {
+              subscriptionPlan: subscriptionPlan.name,
+            })}
           </CardDescription>
         </CardHeader>
-        <CardContent>{subscriptionPlan.description}</CardContent>
+        <CardContent>{getDescription()}</CardContent>
         <CardFooter className="flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
           <div className="flex justify-between space-x-2">
             <button
@@ -103,8 +121,8 @@ export function BillingForm({
                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
               )}
               {subscriptionPlan.isPro
-                ? "Manage Subscription"
-                : "Upgrade to PRO"}
+                ? `${t("manage-subscription")}`
+                : `${t("upgrade-subscription")}`}
             </button>
             {subscriptionPlan.isPro && (
               <button
@@ -115,15 +133,15 @@ export function BillingForm({
                 {isCancelLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                Cancel subscription
+                {t("cancel-subscription")}
               </button>
             )}
           </div>
           {subscriptionPlan.isPro ? (
             <p className="rounded-full text-xs font-medium">
               {subscriptionPlan.isCanceled
-                ? "Your plan will be canceled on "
-                : "Your plan renews on "}
+                ? `${t("canceled-date")}`
+                : `${t("renew-date")}`}
               {formatDate(subscriptionPlan.stripeCurrentPeriodEnd)}.
             </p>
           ) : null}

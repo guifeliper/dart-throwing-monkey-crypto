@@ -1,46 +1,43 @@
-import { getToken } from "next-auth/jwt"
 import { withAuth } from "next-auth/middleware"
-import { NextResponse } from "next/server"
+import createIntlMiddleware from "next-intl/middleware"
+import { NextRequest } from "next/server"
 
-export default withAuth(
-  async function middleware(req) {
-    const token = await getToken({ req })
-    const isAuth = !!token
-    const isAuthPage =
-      req.nextUrl.pathname.startsWith("/login") ||
-      req.nextUrl.pathname.startsWith("/register")
+const locales = ["en", "pt"]
+const publicPages = ["/", "/login", "/register", "/dashboard", "/pricing"]
 
-    if (isAuthPage) {
-      if (isAuth) {
-        return NextResponse.redirect(new URL("/dashboard", req.url))
-      }
+const intlMiddleware = createIntlMiddleware({
+  locales,
+  defaultLocale: "en",
+})
 
-      return null
-    }
-
-    if (!isAuth) {
-      let from = req.nextUrl.pathname
-      if (req.nextUrl.search) {
-        from += req.nextUrl.search
-      }
-
-      return NextResponse.redirect(
-        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
-      )
-    }
+const authMiddleware = withAuth(
+  async function onSuccess(req) {
+    return intlMiddleware(req)
   },
   {
     callbacks: {
-      async authorized() {
-        // This is a work-around for handling redirect on auth pages.
-        // We return true here so that the middleware function above
-        // is always called.
-        return true
-      },
+      authorized: ({ token }) => token != null,
+    },
+    pages: {
+      signIn: "/login",
     },
   }
 )
 
+export default function middleware(req: NextRequest) {
+  const publicPathnameRegex = RegExp(
+    `^(/(${locales.join("|")}))?(${publicPages.join("|")})?/?$`,
+    "i"
+  )
+  const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname)
+
+  if (isPublicPage) {
+    return intlMiddleware(req)
+  } else {
+    return (authMiddleware as any)(req)
+  }
+}
+
 export const config = {
-  matcher: ["/dashboard/billing", "/login", "/register"],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 }

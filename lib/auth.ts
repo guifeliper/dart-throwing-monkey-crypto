@@ -22,6 +22,10 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: env.NEXTAUTH_SECRET,
   callbacks: {
+    async redirect({ baseUrl }) {
+      const redirectLink = `${baseUrl}/dashboard`
+      return redirectLink
+    },
     async session({ token, session }) {
       if (token) {
         session.user = session.user || {} // Ensure session.user is defined

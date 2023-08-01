@@ -9,14 +9,20 @@ import { siteConfig } from "@/config/site"
 import { authOptions } from "@/lib/auth"
 import { getCurrentUser } from "@/lib/session"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
+import { getTranslator } from "next-intl/server"
 
 export const metadata = {
   title: "Billing",
   description: "Manage billing and your subscription plan.",
 }
-
-export default async function BillingPage() {
+interface BillingPageProps {
+  params: {
+    locale: string
+  }
+}
+export default async function BillingPage({ params }: BillingPageProps) {
   const user = await getCurrentUser()
+  const t = await getTranslator(params.locale ?? "en", "Dashboard-Billing")
 
   if (!user) {
     redirect(authOptions?.pages?.signIn || "/login")
@@ -31,24 +37,20 @@ export default async function BillingPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader
-        heading="Billing"
-        text="Manage billing and your subscription plan."
-      />
+      <DashboardHeader heading={t("billing")} text={t("manage-billing")} />
       <div className="grid gap-8">
         <Alert className="!pl-14">
           <Icons.warning />
-          <AlertTitle>This is a demo app.</AlertTitle>
+          <AlertTitle>{t("alert-title")}</AlertTitle>
           <AlertDescription>
-            {siteConfig.name} app is a demo app using a Stripe test environment.
-            You can find a list of test card numbers on the{" "}
+            {t("alert-description", { name: siteConfig.name })}
             <a
               href="https://stripe.com/docs/testing#cards"
               target="_blank"
               rel="noreferrer"
               className="font-medium underline underline-offset-8"
             >
-              Stripe docs
+              {t("payment-docs")}
             </a>
             .
           </AlertDescription>

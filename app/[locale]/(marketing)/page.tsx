@@ -1,10 +1,11 @@
-import React from "react"
-import Link from "next/link"
+import { buttonVariants } from "@/components/ui/button"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
+import Link from "next/link"
 
-export default async function IndexPage() {
+export default function IndexPage() {
+  const t = useTranslations("Marketing")
   return (
     <>
       <section className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 lg:py-32">
@@ -14,14 +15,13 @@ export default async function IndexPage() {
             className="rounded-2xl bg-muted px-4 py-1.5 text-sm font-medium"
             target="_blank"
           >
-            Follow along on Twitter
+            {t("follow-twitter")}
           </Link>
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
-            Open-Source Experiment Tests Crypto with Dart-Throwing Monkey
+            {t("title")}
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-            Join the Journey: Building an Open-Source Next.js 13 Web App
-            Together
+            {t("subtitle")}
           </p>
           <div className="space-x-4">
             <Link
@@ -41,12 +41,10 @@ export default async function IndexPage() {
       >
         <div className="mx-auto flex max-w-[58rem] flex-col items-center space-y-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Features
+            {t("features")}
           </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            This project is an experiment to see how a modern app, with features
-            like auth, subscriptions, API routes, and static pages would work in
-            Next.js 13 app dir.
+            {t("features-description")}
           </p>
         </div>
         <div className="mx-auto grid justify-center gap-4 sm:grid-cols-2 md:max-w-[64rem] md:grid-cols-3">
@@ -58,7 +56,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Next.js 13</h3>
                 <p className="text-sm text-muted-foreground">
-                  App dir, Routing, Layouts, Loading UI and API routes.
+                  {t("features-descriptions.nextjs")}
                 </p>
               </div>
             </div>
@@ -70,9 +68,7 @@ export default async function IndexPage() {
               </svg>
               <div className="space-y-2">
                 <h3 className="font-bold">React 18</h3>
-                <p className="text-sm">
-                  Server and Client Components. Use hook.
-                </p>
+                <p className="text-sm">{t("features-descriptions.react")}</p>
               </div>
             </div>
           </div>
@@ -84,7 +80,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Database</h3>
                 <p className="text-sm text-muted-foreground">
-                  ORM using Prisma and deployed on PlanetScale.
+                  {t("features-descriptions.database")}
                 </p>
               </div>
             </div>
@@ -97,8 +93,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Components</h3>
                 <p className="text-sm text-muted-foreground">
-                  UI components built using Radix UI and styled with Tailwind
-                  CSS.
+                  {t("features-descriptions.components")}
                 </p>
               </div>
             </div>
@@ -117,7 +112,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Authentication</h3>
                 <p className="text-sm text-muted-foreground">
-                  Authentication using NextAuth.js and middlewares.
+                  {t("features-descriptions.authentication")}
                 </p>
               </div>
             </div>
@@ -130,7 +125,7 @@ export default async function IndexPage() {
               <div className="space-y-2">
                 <h3 className="font-bold">Subscriptions</h3>
                 <p className="text-sm text-muted-foreground">
-                  Free and paid subscriptions using Stripe.
+                  {t("features-descriptions.subscription")}
                 </p>
               </div>
             </div>
@@ -140,11 +135,14 @@ export default async function IndexPage() {
       <section id="open-source" className="container py-8 md:py-12 lg:py-24">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Proudly Open Source
+            {t("open-source")}
           </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            Taxonomy is open source and powered by open source software. <br />{" "}
-            The code is available on{" "}
+            {t.rich("open-source-description", {
+              name: siteConfig.name,
+              strong: (children) => <strong>{children}</strong>,
+              br: () => <br />,
+            })}{" "}
             <Link
               href={siteConfig.links.github}
               target="_blank"
