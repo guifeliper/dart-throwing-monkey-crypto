@@ -66,5 +66,19 @@
     "login": "Login",
     "openApp": "Abrir aplicativo",
     "menu": "Menu"
+  },
+  "Login": {
+    "back": "Voltar",
+    "welcome-back": "Bem-vindo de volta!",
+    "login": "Login",
+    "email": "Email",
+    "continue-with": "Continue com",
+    "sign-up-redirect": "Não tem uma conta? Criar uma conta",
+    "create-account": "Criar uma conta",
+    "register-description": "Registro fácil usando a inscrição seguinte:",
+    "terms-description": "Ao clicar em Continuar, você concorda com nossos",
+    "terms": "Termos de Serviço",
+    "privacy": "Política de Privacidade",
+    "and": "e"
   }
 }

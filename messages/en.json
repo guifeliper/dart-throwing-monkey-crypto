@@ -66,5 +66,19 @@
     "login": "Login",
     "openApp": "Open App",
     "menu": "Menu"
+  },
+  "Login": {
+    "back": "Back",
+    "welcome-back": "Welcome back",
+    "login": "Login",
+    "email": "Email",
+    "continue-with": "Continue with",
+    "sign-up-redirect": "Don't have an account? Sign Up",
+    "create-account": "Create an account",
+    "register-description": "Easy register using the following sign up:",
+    "terms-description": "By clicking continue, you agree to our",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "and": "and"
   }
 }
