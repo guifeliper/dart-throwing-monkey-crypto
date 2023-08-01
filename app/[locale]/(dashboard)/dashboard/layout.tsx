@@ -9,6 +9,7 @@ import { UserAccountNav } from "@/components/user-account-nav"
 import { dashboardConfig } from "@/config/dashboard"
 import { getCurrentUser } from "@/lib/session"
 import { cn } from "@/lib/utils"
+import pick from "lodash/pick"
 import { NextIntlClientProvider } from "next-intl"
 
 interface DashboardLayoutProps {
@@ -26,43 +27,46 @@ export default async function DashboardLayout({
   let messages = await getMessages(locale ?? "en")
 
   return (
-    <div className="flex min-h-screen flex-col space-y-6">
-      <header className="sticky top-0 z-40 border-b bg-background">
-        <div className="container flex h-16 items-center justify-between py-4">
-          <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider
+      locale={locale}
+      messages={pick(messages, "MainNavigation")}
+    >
+      <div className="flex min-h-screen flex-col space-y-6">
+        <header className="sticky top-0 z-40 border-b bg-background">
+          <div className="container flex h-16 items-center justify-between py-4">
             <MainNav items={dashboardConfig.mainNav} />
-          </NextIntlClientProvider>
-          {user && (
-            <UserAccountNav
-              user={{
-                name: user.name,
-                image: user.image,
-                email: user.email,
-              }}
-            />
-          )}
-          {!user && (
-            <Link
-              href="/login"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
-            >
-              Login
-            </Link>
-          )}
+            {user && (
+              <UserAccountNav
+                user={{
+                  name: user.name,
+                  image: user.image,
+                  email: user.email,
+                }}
+              />
+            )}
+            {!user && (
+              <Link
+                href="/login"
+                className={cn(
+                  buttonVariants({ variant: "secondary", size: "sm" }),
+                  "px-4"
+                )}
+              >
+                Login
+              </Link>
+            )}
+          </div>
+        </header>
+        <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
+          <aside className="hidden w-[200px] flex-col md:flex">
+            <DashboardNav items={dashboardConfig.sidebarNav} />
+          </aside>
+          <main className="flex w-full flex-1 flex-col overflow-hidden">
+            {children}
+          </main>
         </div>
-      </header>
-      <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
-        <aside className="hidden w-[200px] flex-col md:flex">
-          <DashboardNav items={dashboardConfig.sidebarNav} />
-        </aside>
-        <main className="flex w-full flex-1 flex-col overflow-hidden">
-          {children}
-        </main>
+        <SiteFooter className="border-t" />
       </div>
-      <SiteFooter className="border-t" />
-    </div>
+    </NextIntlClientProvider>
   )
 }
