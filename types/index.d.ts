@@ -11,6 +11,8 @@ type MenuTypes =
   | "login"
   | "openApp"
   | "menu"
+  | "portfolio"
+  | "billing"
 
 export type NavItem = {
   title: MenuTypes
