@@ -1,3 +1,4 @@
+import { InvestmentList } from "@/components/investment-list"
 import {
   Card,
   CardContent,
@@ -31,18 +32,7 @@ export default function DashboardPage() {
             <p>Card Footer</p>
           </CardFooter>
         </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter>
-        </Card>
+        <InvestmentList />
       </div>
       <div className="grid gap-4">
         <Card>

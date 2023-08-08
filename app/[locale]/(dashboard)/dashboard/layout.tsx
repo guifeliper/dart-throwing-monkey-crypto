@@ -57,7 +57,7 @@ export default async function DashboardLayout({
           </div>
         </header>
 
-        <main className="container grid flex-1 gap-6 md:grid-cols-[300px_1fr]">
+        <main className="container grid flex-1 gap-6 md:grid-cols-[400px_1fr]">
           {children}
         </main>
         <SiteFooter className="border-t" />
