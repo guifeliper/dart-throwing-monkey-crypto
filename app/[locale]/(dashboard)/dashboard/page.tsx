@@ -1,4 +1,5 @@
 import { InvestmentList } from "@/components/investment-list"
+import { InvestmentSummary } from "@/components/investment-summary"
 import {
   Card,
   CardContent,
@@ -20,18 +21,7 @@ export default function DashboardPage() {
   return (
     <Fragment>
       <div className="grid gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>Card Content</p>
-          </CardContent>
-          <CardFooter>
-            <p>Card Footer</p>
-          </CardFooter>
-        </Card>
+        <InvestmentSummary />
         <InvestmentList />
       </div>
       <div className="grid gap-4">

@@ -1,8 +1,28 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { cn } from "@/lib/utils"
+import { VariantProps, cva } from "class-variance-authority"
 
-export function InvestmentListItem() {
+const wrapperVariants = cva(
+  "flex cursor-pointer items-center rounded-md p-2 hover:bg-muted",
+  {
+    variants: {
+      selected: {
+        true: "bg-muted",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      selected: false,
+    },
+  }
+)
+interface InvestmentListItemProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof wrapperVariants> {}
+
+export function InvestmentListItem({ selected }: InvestmentListItemProps) {
   return (
-    <div className="flex cursor-pointer items-center rounded-md p-2 hover:bg-muted">
+    <div className={cn(wrapperVariants({ selected }))}>
       <Avatar className="h-9 w-9">
         <AvatarImage src="/avatars/01.png" alt="Avatar" />
         <AvatarFallback>OM</AvatarFallback>
