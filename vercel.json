@@ -6,7 +6,7 @@
     },
     {
       "path": "/api/updateTokens",
-      "schedule": "30 23 * * 6"
+      "schedule": "0 23 * * 5/6"
     }
   ]
 }
