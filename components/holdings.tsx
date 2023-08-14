@@ -1,8 +1,9 @@
+import { HoldingsTable } from "@/components/holdings-table"
+import { buttonVariants } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "./ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 
-export const HoldingsSummary = () => {
+export const Holdings = () => {
   return (
     <Card>
       <CardHeader>
@@ -20,18 +21,25 @@ export const HoldingsSummary = () => {
               -€63.33 (3.30%)
             </p>
             <div className="mt-2 flex items-center gap-2">
-              <button type="submit" className={cn(buttonVariants())}>
+              <button
+                type="submit"
+                className={cn(buttonVariants(), "uppercase ")}
+              >
                 Edit me
               </button>
               <button
                 type="submit"
-                className={cn(buttonVariants({ variant: "outline" }))}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "uppercase"
+                )}
               >
                 Rebalance
               </button>
             </div>
           </div>
         </div>
+        <HoldingsTable />
       </CardContent>
     </Card>
   )
