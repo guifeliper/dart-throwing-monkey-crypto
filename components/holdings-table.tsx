@@ -71,8 +71,8 @@ export function HoldingsTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {holdings.map((item) => (
-          <TableRow key={item.instrument}>
+        {holdings.map((item, i) => (
+          <TableRow key={i}>
             <TableCell className="font-medium">{item.instrument}</TableCell>
             <TableCell>
               {item.actual}/{item.target}

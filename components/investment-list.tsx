@@ -25,7 +25,7 @@ export function InvestmentList() {
           </CardHeader>
           <CardContent className="space-y-1">
             {new Array(8).fill(null).map((_, i) => (
-              <InvestmentListItem selected={i == 0} />
+              <InvestmentListItem key={i} selected={i == 0} />
             ))}
           </CardContent>
         </Card>
@@ -40,7 +40,7 @@ export function InvestmentList() {
           </CardHeader>
           <CardContent className="space-y-2">
             {new Array(8).fill(null).map((_, i) => (
-              <InvestmentListItem />
+              <InvestmentListItem key={i} />
             ))}
           </CardContent>
         </Card>
