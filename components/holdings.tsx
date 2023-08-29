@@ -1,3 +1,4 @@
+import { HoldingsPieChart } from "@/components/holdings-pie-chart"
 import { HoldingsTable } from "@/components/holdings-table"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,8 +12,10 @@ export const Holdings = () => {
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-4 p-5">
-          <div className="mx-6 my-16 shrink-0">grafico</div>
-          <div className="flex flex-col items-center">
+          <div className="mx-6 my-16 shrink-0">
+            <HoldingsPieChart />
+          </div>
+          <div className="flex flex-col items-center justify-center">
             <div className="uppercase">Holdings value</div>
             <p className="text-2xl font-bold leading-7 text-gray-800 dark:text-gray-300">
               €9,171.54
