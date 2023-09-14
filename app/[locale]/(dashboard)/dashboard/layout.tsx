@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { getMessages } from "@/components/get-messages"
 import { MainNav } from "@/components/main-nav"
 import { SiteFooter } from "@/components/site-footer"
@@ -10,6 +8,7 @@ import { getCurrentUser } from "@/lib/session"
 import { cn } from "@/lib/utils"
 import pick from "lodash/pick"
 import { NextIntlClientProvider } from "next-intl"
+import Link from "next/link"
 
 interface DashboardLayoutProps {
   children?: React.ReactNode

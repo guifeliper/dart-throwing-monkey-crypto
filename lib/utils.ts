@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 import { env } from "@/env.mjs"
+import { AssetBalance } from "@/types"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -20,7 +21,7 @@ export function absoluteUrl(path: string) {
   return `${env.NEXT_PUBLIC_APP_URL}${path}`
 }
 
-export function mergeBalanceObjects(data) {
+export function mergeBalanceObjects(data): AssetBalance[] {
   const mergedData = {}
 
   for (const item of data) {

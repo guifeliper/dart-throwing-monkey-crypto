@@ -74,3 +74,17 @@ export type UserSubscriptionPlan = SubscriptionPlan &
     stripeCurrentPeriodEnd: number
     isPro: boolean
   }
+
+export type AssetBalance = {
+  asset: string
+  quantity: number
+  pair: string | null
+  value: number
+  totalFIAT: number
+  weight: number
+}
+
+export type InvestmentBalanceData = {
+  totalBalanceFIAT: number
+  data: AssetBalance[]
+}
