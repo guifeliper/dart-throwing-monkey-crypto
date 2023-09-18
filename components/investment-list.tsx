@@ -6,14 +6,19 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { InvestmentListItem } from "./investment-list-item"
+import { AssetBalance } from "@/types"
+import { InvestmentListItemSkeleton } from "./investment-list-item"
 
-export function InvestmentList() {
+interface InvestmentListProps {
+  investments: AssetBalance[]
+}
+
+export function InvestmentList({ investments }: InvestmentListProps) {
   return (
-    <Tabs defaultValue="pies" className="h-full w-full">
+    <Tabs defaultValue="investments" className="h-full w-full">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="pies">Pies</TabsTrigger>
         <TabsTrigger value="investments">Invesments</TabsTrigger>
+        <TabsTrigger value="pies">Pies</TabsTrigger>
       </TabsList>
       <TabsContent value="pies">
         <Card>
@@ -23,25 +28,23 @@ export function InvestmentList() {
               Select an pie to view more details.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-1">
-            {new Array(8).fill(null).map((_, i) => (
-              <InvestmentListItem key={i} selected={i == 0} />
-            ))}
-          </CardContent>
+          <CardContent className="max-h-[680px] space-y-2 overflow-scroll"></CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="investments">
-        <Card>
+        <Card className="h-full">
           <CardHeader>
             <CardTitle>Investments</CardTitle>
             <CardDescription>
               Select an investment to view more details.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            {new Array(8).fill(null).map((_, i) => (
-              <InvestmentListItem key={i} />
-            ))}
+          <CardContent className="max-h-full grow space-y-2 overflow-scroll p-6 pt-0">
+            <InvestmentListItemSkeleton />
+            {/* {investments.length === 0 ? <InvestmentListItemSkeleton /> : null} */}
+            {/* {investments.map((investment) => (
+              <InvestmentListItem key={investment.asset} data={investment} />
+            ))} */}
           </CardContent>
         </Card>
       </TabsContent>

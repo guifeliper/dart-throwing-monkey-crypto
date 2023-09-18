@@ -1,6 +1,8 @@
+import { authOptions } from "@/lib/auth"
 import { executeTradePlan } from "@/lib/execute-trade-plan"
 import { generateTradePlan } from "@/lib/generate-trade-plan"
 import { getKrakenBalance } from "@/lib/get-kraken-balance"
+import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
@@ -19,6 +21,13 @@ const carteira = [
 
 export async function GET() {
   try {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user || !session?.user.email) {
+      return new Response(JSON.stringify({ totalBalanceFIAT: 0, data: [] }), {
+        status: 403,
+      })
+    }
     const { data, totalBalanceUsd } = await getKrakenBalance()
 
     const tradePlan = await generateTradePlan(

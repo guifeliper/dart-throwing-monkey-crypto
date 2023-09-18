@@ -1,20 +1,27 @@
 import { InvestmentBalanceData } from "@/types"
 import * as React from "react"
 
-export function useInvestmentBalance(): InvestmentBalanceData {
+interface useInvestmentBalance extends InvestmentBalanceData {
+  loading: boolean
+}
+export function useInvestmentBalance(): useInvestmentBalance {
   const [balance, setBalance] = React.useState<InvestmentBalanceData>({
     totalBalanceFIAT: 0,
     data: [],
   })
+
+  const [loading, setLoading] = React.useState(false)
+
   React.useEffect(() => {
-    console.log("hello world")
     const fetchBalance = async () => {
+      setLoading(true)
       const response = await fetch("/api/users/balance")
       const data = (await response.json()) as InvestmentBalanceData
       setBalance(data)
+      setLoading(false)
     }
     fetchBalance()
   }, [])
 
-  return balance
+  return { loading, ...balance }
 }
