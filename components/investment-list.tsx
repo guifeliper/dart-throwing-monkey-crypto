@@ -1,4 +1,8 @@
 import {
+  InvestmentListItem,
+  InvestmentListItemSkeleton,
+} from "@/components/investment-list-item"
+import {
   Card,
   CardContent,
   CardDescription,
@@ -7,8 +11,6 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AssetBalance } from "@/types"
-import { InvestmentListItemSkeleton } from "./investment-list-item"
-
 interface InvestmentListProps {
   investments: AssetBalance[]
 }
@@ -39,12 +41,11 @@ export function InvestmentList({ investments }: InvestmentListProps) {
               Select an investment to view more details.
             </CardDescription>
           </CardHeader>
-          <CardContent className="max-h-full grow space-y-2 overflow-scroll p-6 pt-0">
-            <InvestmentListItemSkeleton />
-            {/* {investments.length === 0 ? <InvestmentListItemSkeleton /> : null} */}
-            {/* {investments.map((investment) => (
+          <CardContent className="grow space-y-2 overflow-scroll p-6 pt-0">
+            {investments.length === 0 ? <InvestmentListItemSkeleton /> : null}
+            {investments.map((investment) => (
               <InvestmentListItem key={investment.asset} data={investment} />
-            ))} */}
+            ))}
           </CardContent>
         </Card>
       </TabsContent>

@@ -8,11 +8,11 @@ export const InvestmentSideBar = () => {
   const { totalBalanceFIAT, data, loading } = useInvestmentBalance()
 
   return (
-    <div className="grid-rows-8 grid gap-4">
-      <div className="col-span-2 row-span-1">
+    <div className="flex flex-col gap-4">
+      <div className="flex-none ">
         <InvestmentSummary value={totalBalanceFIAT} />
       </div>
-      <div className="row-span-7 col-span-2 h-full">
+      <div className="flex-auto">
         <InvestmentList investments={data} />
       </div>
     </div>
