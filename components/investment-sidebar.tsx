@@ -13,7 +13,7 @@ export const InvestmentSideBar = () => {
         <InvestmentSummary value={totalBalanceFIAT} />
       </div>
       <div className="flex-auto">
-        <InvestmentList investments={data} />
+        <InvestmentList investments={data} pies={[]} />
       </div>
     </div>
   )

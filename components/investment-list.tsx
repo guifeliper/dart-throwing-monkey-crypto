@@ -11,11 +11,13 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AssetBalance } from "@/types"
+import { PieList } from "./pie-list"
 interface InvestmentListProps {
   investments: AssetBalance[]
+  pies: AssetBalance[]
 }
 
-export function InvestmentList({ investments }: InvestmentListProps) {
+export function InvestmentList({ investments, pies }: InvestmentListProps) {
   return (
     <Tabs defaultValue="investments" className="h-full w-full">
       <TabsList className="grid w-full grid-cols-2">
@@ -30,7 +32,9 @@ export function InvestmentList({ investments }: InvestmentListProps) {
               Select an pie to view more details.
             </CardDescription>
           </CardHeader>
-          <CardContent className="max-h-[680px] space-y-2 overflow-scroll"></CardContent>
+          <CardContent className="max-h-[680px] space-y-2 overflow-scroll">
+            <PieList pies={pies} />
+          </CardContent>
         </Card>
       </TabsContent>
       <TabsContent value="investments">
@@ -41,7 +45,7 @@ export function InvestmentList({ investments }: InvestmentListProps) {
               Select an investment to view more details.
             </CardDescription>
           </CardHeader>
-          <CardContent className="grow space-y-2 overflow-scroll p-6 pt-0">
+          <CardContent className="max-h-[680px] grow space-y-2 overflow-scroll p-6 pt-0">
             {investments.length === 0 ? <InvestmentListItemSkeleton /> : null}
             {investments.map((investment) => (
               <InvestmentListItem key={investment.asset} data={investment} />

@@ -1,7 +1,7 @@
 import { SiteConfig } from "@/types"
 
 export const siteConfig: SiteConfig = {
-  name: "Dart Throwing Monkey",
+  name: "Harv",
   description:
     "An open source application built to tests the Dart-Throwing Monkey theory on crypto.",
   url: "https://harv.app",

@@ -57,8 +57,8 @@ export function InvestmentListItem({
   )
 }
 
-export const InvestmentListItemSkeleton = () => {
-  return Array.from({ length: 12 }).map((_, i) => (
-    <Skeleton className="h-10 w-full" />
+export const InvestmentListItemSkeleton = ({ length = 12 }) => {
+  return Array.from({ length: length }).map((_, i) => (
+    <Skeleton key={i} className="h-10 w-full" />
   ))
 }
