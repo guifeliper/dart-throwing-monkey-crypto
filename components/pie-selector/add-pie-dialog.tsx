@@ -1,7 +1,7 @@
 import { InvestmentListItem } from "@/components/investment-list-item"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { AddSlicesToPie } from "./add-slices-to-pie"
+import StepperStates from "./stepper-states"
 
 export const PieList = ({ pies }) => {
   return (
@@ -25,7 +25,7 @@ export const PieList = ({ pies }) => {
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <AddSlicesToPie />
+            <StepperStates />
           </DialogContent>
         </Dialog>
       </div>

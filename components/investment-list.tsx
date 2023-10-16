@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AssetBalance } from "@/types"
-import { PieList } from "./pie-list"
+import { PieList } from "./pie-selector/add-pie-dialog"
 interface InvestmentListProps {
   investments: AssetBalance[]
   pies: AssetBalance[]

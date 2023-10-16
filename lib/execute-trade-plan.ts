@@ -7,17 +7,6 @@ export async function executeTradePlan(tradePlan) {
     key: env.KRANKEN_API_KEY,
     secret: env.KRANKEN_SECRET_KEY,
   })
-  for (const action of tradePlan.buy) {
-    // Execute buy orders here
-    const buyResponse = await kraken.addOrder({
-      pair: action.pair,
-      type: "buy",
-      ordertype: "market",
-      volume: action.quantity,
-    })
-    console.log(`Buy ${action.quantity} ${action.pair}:`, buyResponse)
-  }
-
   for (const action of tradePlan.sell) {
     // Execute sell orders here
     const sellResponse = await kraken.addOrder({
@@ -27,5 +16,15 @@ export async function executeTradePlan(tradePlan) {
       volume: action.quantity,
     })
     console.log(`Sell ${action.quantity} ${action.pair}:`, sellResponse)
+  }
+  for (const action of tradePlan.buy) {
+    // Execute buy orders here
+    const buyResponse = await kraken.addOrder({
+      pair: action.pair,
+      type: "buy",
+      ordertype: "market",
+      volume: action.quantity,
+    })
+    console.log(`Buy ${action.quantity} ${action.pair}:`, buyResponse)
   }
 }
