@@ -33,7 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useAllKrakenInstruments } from "@/hooks/use-all-kraken-instruments"
-import { useFieldArray } from "react-hook-form"
+import { useFieldArray, useFormContext } from "react-hook-form"
 
 export type Payment = {
   id: string
@@ -114,7 +114,8 @@ function getDataByIndices(
   return result
 }
 
-export function AssetsDataTable({ form }) {
+export function AssetsDataTable() {
+  const form = useFormContext()
   const { data, error, loading } = useAllKrakenInstruments<Payment>()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -143,20 +144,25 @@ export function AssetsDataTable({ form }) {
     },
   })
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "slices",
     control: form.control,
   })
 
   React.useEffect(() => {
     const dataSelected = getDataByIndices(rowSelection, data ?? [])
-    const slices = dataSelected.map((item) => ({
-      name: item.name,
-      symbol: item.symbol,
-      target: 100 / dataSelected.length,
-    }))
-
-    append(slices)
+    console.log("dataSelected", dataSelected)
+    console.log("rowSelection", rowSelection)
+    if (dataSelected.length > 0) {
+      const slices = dataSelected.map((item) => ({
+        name: item.name,
+        symbol: item.symbol,
+        target: 100 / dataSelected.length,
+      }))
+      console.log("slices", slices, fields)
+      remove()
+      append(slices)
+    }
   }, [data, rowSelection, append])
 
   return (

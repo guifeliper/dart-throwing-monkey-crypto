@@ -1,3 +1,5 @@
+"use client"
+
 import { InvestmentListItem } from "@/components/investment-list-item"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"

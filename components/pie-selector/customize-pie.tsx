@@ -12,9 +12,10 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { XIcon } from "lucide-react"
 import { useEffect } from "react"
-import { useFieldArray } from "react-hook-form"
+import { useFieldArray, useFormContext } from "react-hook-form"
 
-export const CustomizePie = ({ form }) => {
+export const CustomizePie = () => {
+  const form = useFormContext()
   const { fields, update, remove } = useFieldArray({
     name: "slices",
     control: form.control,
@@ -23,6 +24,7 @@ export const CustomizePie = ({ form }) => {
   useEffect(() => {
     console.log("fields", fields)
   }, [fields])
+
   return (
     <div className="flex flex-col space-y-8 py-4 lg:flex-row lg:space-x-12 lg:space-y-0">
       <aside className="mx-4 lg:w-1/5">
@@ -43,7 +45,7 @@ export const CustomizePie = ({ form }) => {
       <div className="flex-1 lg:max-w-2xl">
         <div className="grid gap-2 pt-2">
           {fields.map((field, index) => (
-            <div className="grid gap-4">
+            <div className="grid gap-4" key={index}>
               <div className="flex items-center justify-between">
                 <Label htmlFor="target">{field.symbol}</Label>
                 <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
@@ -54,7 +56,7 @@ export const CustomizePie = ({ form }) => {
                 <Slider
                   id="target"
                   max={100}
-                  defaultValue={[10]}
+                  defaultValue={[field.target]}
                   step={1}
                   onValueChange={(value) =>
                     update(index, { ...field, target: value[0] })

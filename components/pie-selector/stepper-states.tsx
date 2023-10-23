@@ -1,11 +1,12 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
-import { Form } from "@/components/ui/form"
 import { Step, StepConfig, Steps } from "@/components/ui/stepper"
 import { useStepper } from "@/components/ui/use-stepper"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Percent, PiggyBank, Settings } from "lucide-react"
 import { useEffect } from "react"
-import { useForm } from "react-hook-form"
+import { FormProvider, useForm } from "react-hook-form"
 import * as z from "zod"
 import { AssetsDataTable } from "./assets-data-table"
 import { CustomizePie } from "./customize-pie"
@@ -70,13 +71,13 @@ export default function StepperStates() {
   }, [form])
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Steps activeStep={activeStep}>
           {steps.map((step, index) => (
             <Step index={index} key={index} {...step}>
-              {index === 0 && <AssetsDataTable form={form} />}
-              {index === 1 && <CustomizePie form={form} />}
+              {index === 0 && <AssetsDataTable />}
+              {index === 1 && <CustomizePie />}
               {index === 2 && <p>Step 3</p>}
             </Step>
           ))}
@@ -99,6 +100,6 @@ export default function StepperStates() {
           )}
         </div>
       </form>
-    </Form>
+    </FormProvider>
   )
 }
