@@ -88,3 +88,18 @@ export type InvestmentBalanceData = {
   totalBalanceFIAT: number
   data: AssetBalance[]
 }
+
+export type SlicePie = {
+  id: string
+  name: string
+  asset: string
+  target: number
+}
+
+export type Pie = {
+  id: string
+  label: string
+  value: number
+  color: string
+  slices: SlicePie[]
+}

@@ -96,7 +96,24 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ]
 
-export function AssetsDataTable() {
+function getDataByIndices(
+  indicesObj: { [key: string]: boolean },
+  dataArray: any[]
+): any[] {
+  let result: any[] = []
+
+  for (let index in indicesObj) {
+    let numericIndex = parseInt(index)
+
+    if (numericIndex >= 0 && numericIndex < dataArray.length) {
+      result.push(dataArray[numericIndex])
+    }
+  }
+
+  return result
+}
+
+export function AssetsDataTable({ append }) {
   const { data, error, loading } = useAllKrakenInstruments<Payment>()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -124,6 +141,17 @@ export function AssetsDataTable() {
       rowSelection,
     },
   })
+
+  React.useEffect(() => {
+    const dataSelected = getDataByIndices(rowSelection, data ?? [])
+    const slices = dataSelected.map((item) => ({
+      name: item.name,
+      symbol: item.symbol,
+      target: 100 / dataSelected.length,
+    }))
+
+    append(slices)
+  }, [data, rowSelection, append])
 
   return (
     <div className="">
@@ -216,8 +244,8 @@ export function AssetsDataTable() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
+          {table.getFilteredSelectedRowModel().rows.length} instrument(s)
+          selected.
         </div>
       </div>
     </div>
