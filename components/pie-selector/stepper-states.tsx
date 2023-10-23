@@ -2,13 +2,13 @@ import { Button } from "@/components/ui/button"
 import { Form } from "@/components/ui/form"
 import { Step, StepConfig, Steps } from "@/components/ui/stepper"
 import { useStepper } from "@/components/ui/use-stepper"
-import { Pie } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Percent, PiggyBank, Settings } from "lucide-react"
-import { useEffect, useState } from "react"
-import { useFieldArray, useForm } from "react-hook-form"
+import { useEffect } from "react"
+import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { AssetsDataTable } from "./assets-data-table"
+import { CustomizePie } from "./customize-pie"
 
 const steps = [
   { label: "Add slices to the pie", icon: <PiggyBank /> },
@@ -55,16 +55,10 @@ export default function StepperStates() {
     initialStep: 0,
     steps,
   })
-  const [pie, setPie] = useState<Pie>()
   const form = useForm<PieFormValues>({
     resolver: zodResolver(pieFormSchema),
     defaultValues,
     mode: "onChange",
-  })
-
-  const { append } = useFieldArray({
-    name: "slices",
-    control: form.control,
   })
 
   function onSubmit(data: PieFormValues) {
@@ -81,8 +75,8 @@ export default function StepperStates() {
         <Steps activeStep={activeStep}>
           {steps.map((step, index) => (
             <Step index={index} key={index} {...step}>
-              {index === 0 && <AssetsDataTable append={append} />}
-              {index === 1 && <p>Step 2</p>}
+              {index === 0 && <AssetsDataTable form={form} />}
+              {index === 1 && <CustomizePie form={form} />}
               {index === 2 && <p>Step 3</p>}
             </Step>
           ))}

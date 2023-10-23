@@ -33,6 +33,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useAllKrakenInstruments } from "@/hooks/use-all-kraken-instruments"
+import { useFieldArray } from "react-hook-form"
 
 export type Payment = {
   id: string
@@ -113,7 +114,7 @@ function getDataByIndices(
   return result
 }
 
-export function AssetsDataTable({ append }) {
+export function AssetsDataTable({ form }) {
   const { data, error, loading } = useAllKrakenInstruments<Payment>()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -142,6 +143,11 @@ export function AssetsDataTable({ append }) {
     },
   })
 
+  const { fields, append } = useFieldArray({
+    name: "slices",
+    control: form.control,
+  })
+
   React.useEffect(() => {
     const dataSelected = getDataByIndices(rowSelection, data ?? [])
     const slices = dataSelected.map((item) => ({
@@ -154,7 +160,7 @@ export function AssetsDataTable({ append }) {
   }, [data, rowSelection, append])
 
   return (
-    <div className="">
+    <div className="py-4">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter symbol..."

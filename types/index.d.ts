@@ -98,7 +98,7 @@ export type SlicePie = {
 
 export type Pie = {
   id: string
-  label: string
+  name: string
   value: number
   color: string
   slices: SlicePie[]
