@@ -4,34 +4,27 @@ import { Button } from "@/components/ui/button"
 import { Step, StepConfig, Steps } from "@/components/ui/stepper"
 import { useStepper } from "@/components/ui/use-stepper"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Percent, PiggyBank, Settings } from "lucide-react"
-import { useEffect } from "react"
-import { FormProvider, useForm } from "react-hook-form"
+import { Percent, PiggyBank } from "lucide-react"
+import { useForm } from "react-hook-form"
 import * as z from "zod"
+
+import { Form } from "@/components/ui/form"
 import { AssetsDataTable } from "./assets-data-table"
 import { CustomizePie } from "./customize-pie"
 
 const steps = [
   { label: "Add slices to the pie", icon: <PiggyBank /> },
   { label: "Customize your pie", icon: <Percent /> },
-  { label: "Investing options", icon: <Settings /> },
 ] satisfies StepConfig[]
 
 const pieFormSchema = z.object({
-  name: z
-    .string()
-    .min(3, {
-      message: "Pie's name must be at least 3 characters.",
-    })
-    .max(30, {
-      message: "Pie's name must not be longer than 30 characters.",
-    }),
+  name: z.string().optional(),
   slices: z
     .array(
       z.object({
-        name: z.string(),
-        symbol: z.string(),
-        target: z.string(),
+        name: z.string().optional(),
+        symbol: z.string().optional(),
+        target: z.number().optional(),
       })
     )
     .optional(),
@@ -51,7 +44,6 @@ export default function StepperStates() {
     activeStep,
     isDisabledStep,
     isLastStep,
-    isOptionalStep,
   } = useStepper({
     initialStep: 0,
     steps,
@@ -63,22 +55,17 @@ export default function StepperStates() {
   })
 
   function onSubmit(data: PieFormValues) {
-    console.log(data)
+    console.log("data", data)
   }
 
-  useEffect(() => {
-    console.log(form.getValues())
-  }, [form])
-
   return (
-    <FormProvider {...form}>
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Steps activeStep={activeStep}>
           {steps.map((step, index) => (
             <Step index={index} key={index} {...step}>
               {index === 0 && <AssetsDataTable />}
               {index === 1 && <CustomizePie />}
-              {index === 2 && <p>Step 3</p>}
             </Step>
           ))}
         </Steps>
@@ -93,13 +80,12 @@ export default function StepperStates() {
               <Button disabled={isDisabledStep} onClick={prevStep}>
                 Prev
               </Button>
-              <Button onClick={nextStep}>
-                {isLastStep ? "Finish" : isOptionalStep ? "Skip" : "Next"}
-              </Button>
+              {isLastStep && <Button type="submit">Submit</Button>}
+              {!isLastStep && <Button onClick={nextStep}>Next</Button>}
             </>
           )}
         </div>
       </form>
-    </FormProvider>
+    </Form>
   )
 }

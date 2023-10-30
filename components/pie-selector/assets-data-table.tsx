@@ -151,19 +151,16 @@ export function AssetsDataTable() {
 
   React.useEffect(() => {
     const dataSelected = getDataByIndices(rowSelection, data ?? [])
-    console.log("dataSelected", dataSelected)
-    console.log("rowSelection", rowSelection)
     if (dataSelected.length > 0) {
       const slices = dataSelected.map((item) => ({
         name: item.name,
         symbol: item.symbol,
         target: 100 / dataSelected.length,
       }))
-      console.log("slices", slices, fields)
       remove()
       append(slices)
     }
-  }, [data, rowSelection, append])
+  }, [data, rowSelection, append, fields, remove])
 
   return (
     <div className="py-4">
