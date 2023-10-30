@@ -8,7 +8,9 @@ import { Percent, PiggyBank } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
+import { DialogFooter } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
+import { Dispatch, SetStateAction } from "react"
 import { AssetsDataTable } from "./assets-data-table"
 import { CustomizePie } from "./customize-pie"
 
@@ -36,7 +38,11 @@ const defaultValues: Partial<PieFormValues> = {
   slices: [],
 }
 
-export default function StepperStates() {
+export default function StepperStates({
+  setDropdownOpen,
+}: {
+  setDropdownOpen: Dispatch<SetStateAction<boolean>>
+}) {
   const {
     nextStep,
     prevStep,
@@ -56,6 +62,7 @@ export default function StepperStates() {
 
   function onSubmit(data: PieFormValues) {
     console.log("data", data)
+    setDropdownOpen(false)
   }
 
   return (
@@ -70,20 +77,13 @@ export default function StepperStates() {
           ))}
         </Steps>
         <div className="flex items-center justify-end gap-2">
-          {activeStep === steps.length ? (
-            <>
-              <h2>All steps completed!</h2>
-              <Button onClick={resetSteps}>Reset</Button>
-            </>
-          ) : (
-            <>
-              <Button disabled={isDisabledStep} onClick={prevStep}>
-                Prev
-              </Button>
-              {isLastStep && <Button type="submit">Submit</Button>}
-              {!isLastStep && <Button onClick={nextStep}>Next</Button>}
-            </>
-          )}
+          <DialogFooter>
+            <Button disabled={isDisabledStep} onClick={prevStep}>
+              Prev
+            </Button>
+            {isLastStep && <Button type="submit">Submit</Button>}
+            {!isLastStep && <Button onClick={nextStep}>Next</Button>}
+          </DialogFooter>
         </div>
       </form>
     </Form>
