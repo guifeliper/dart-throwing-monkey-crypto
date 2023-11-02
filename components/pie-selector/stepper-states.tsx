@@ -10,6 +10,7 @@ import * as z from "zod"
 
 import { DialogFooter } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
+import { useRouter } from "next/router"
 import { Dispatch, SetStateAction } from "react"
 import { AssetsDataTable } from "./assets-data-table"
 import { CustomizePie } from "./customize-pie"
@@ -42,6 +43,7 @@ export default function StepperStates({
 }: {
   setDropdownOpen: Dispatch<SetStateAction<boolean>>
 }) {
+  const router = useRouter()
   const { nextStep, prevStep, activeStep, isDisabledStep, isLastStep } =
     useStepper({
       initialStep: 0,
@@ -54,8 +56,6 @@ export default function StepperStates({
   })
 
   async function onSubmit(data: PieFormValues) {
-    console.log("data", data)
-
     try {
       const response = await fetch("/api/users/create-pie", {
         method: "POST",
@@ -68,6 +68,7 @@ export default function StepperStates({
       if (response.ok) {
         console.log("Pie created successfully!")
         setDropdownOpen(false)
+        router.reload()
       } else {
         console.error("Failed to create pie")
       }

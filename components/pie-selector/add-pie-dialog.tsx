@@ -21,7 +21,7 @@ export const PieList = ({ pies }) => {
       {pies?.map((pie) => <InvestmentListItem key={pie.id} data={pie} />)}
       <div className="flex justify-center">
         <Dialog open={dropdownOpen} onOpenChange={setDropdownOpen}>
-          <DialogTrigger>
+          <DialogTrigger asChild>
             <Button className="bg-blue-600/75 text-white hover:bg-blue-600/30">
               Create a Pie
             </Button>
