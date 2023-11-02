@@ -6,60 +6,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
-const holdings = [
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+54",
-  },
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+54",
-  },
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+54",
-  },
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+54",
-  },
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+54",
-  },
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+54",
-  },
-  {
-    instrument: "Bitcoin",
-    actual: "46%",
-    target: "45%",
-    value: "€250.00",
-    return: "+€54",
-  },
-]
+import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
 
 export function HoldingsTable() {
+  const { selectedInstrument } = useInstrumentSelection()
+
   return (
     <Table>
       <TableHeader>
@@ -71,14 +22,12 @@ export function HoldingsTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {holdings.map((item, i) => (
+        {selectedInstrument?.slices.map((item, i) => (
           <TableRow key={i}>
-            <TableCell className="font-medium">{item.instrument}</TableCell>
-            <TableCell>
-              {item.actual}/{item.target}
-            </TableCell>
-            <TableCell>{item.value}</TableCell>
-            <TableCell className="text-right">{item.return}</TableCell>
+            <TableCell className="font-medium">{item.asset}</TableCell>
+            <TableCell>-/{item.target}</TableCell>
+            <TableCell>{"-"}</TableCell>
+            <TableCell className="text-right">{"-"}</TableCell>
           </TableRow>
         ))}
       </TableBody>

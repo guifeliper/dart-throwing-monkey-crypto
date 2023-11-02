@@ -1,14 +1,19 @@
+"use client"
+
 import { HoldingsPieChart } from "@/components/holdings-pie-chart"
 import { HoldingsTable } from "@/components/holdings-table"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
 import { cn } from "@/lib/utils"
-
 export const Holdings = () => {
+  const { selectedInstrument } = useInstrumentSelection()
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="grow text-3xl leading-10">Pension</CardTitle>
+        <CardTitle className="grow text-3xl leading-10">
+          {selectedInstrument?.name}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-2 gap-4 p-5">

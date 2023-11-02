@@ -6,6 +6,7 @@ import { UserAccountNav } from "@/components/user-account-nav"
 import { dashboardConfig } from "@/config/dashboard"
 import { getCurrentUser } from "@/lib/session"
 import { cn } from "@/lib/utils"
+import { InstrumentSelectionProvider } from "@/provider/instrument-selection"
 import pick from "lodash/pick"
 import { NextIntlClientProvider } from "next-intl"
 import Link from "next/link"
@@ -29,38 +30,40 @@ export default async function DashboardLayout({
       locale={locale}
       messages={pick(messages, "MainNavigation")}
     >
-      <div className="flex min-h-screen flex-col space-y-6">
-        <header className="sticky top-0 z-40 border-b bg-background">
-          <div className="container flex h-16 items-center justify-between py-4">
-            <MainNav items={dashboardConfig.mainNav} />
-            {user && (
-              <UserAccountNav
-                user={{
-                  name: user.name,
-                  image: user.image,
-                  email: user.email,
-                }}
-              />
-            )}
-            {!user && (
-              <Link
-                href="/login"
-                className={cn(
-                  buttonVariants({ variant: "secondary", size: "sm" }),
-                  "px-4"
-                )}
-              >
-                Login
-              </Link>
-            )}
-          </div>
-        </header>
+      <InstrumentSelectionProvider>
+        <div className="flex min-h-screen flex-col space-y-6">
+          <header className="sticky top-0 z-40 border-b bg-background">
+            <div className="container flex h-16 items-center justify-between py-4">
+              <MainNav items={dashboardConfig.mainNav} />
+              {user && (
+                <UserAccountNav
+                  user={{
+                    name: user.name,
+                    image: user.image,
+                    email: user.email,
+                  }}
+                />
+              )}
+              {!user && (
+                <Link
+                  href="/login"
+                  className={cn(
+                    buttonVariants({ variant: "secondary", size: "sm" }),
+                    "px-4"
+                  )}
+                >
+                  Login
+                </Link>
+              )}
+            </div>
+          </header>
 
-        <main className="container grid flex-1 gap-6 md:grid-cols-[400px_1fr]">
-          {children}
-        </main>
-        <SiteFooter className="border-t" />
-      </div>
+          <main className="container grid flex-1 gap-6 md:grid-cols-[400px_1fr]">
+            {children}
+          </main>
+          <SiteFooter className="border-t" />
+        </div>
+      </InstrumentSelectionProvider>
     </NextIntlClientProvider>
   )
 }
