@@ -10,11 +10,11 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { AssetBalance } from "@/types"
+import { AssetBalance, Pie } from "@/types"
 import { PieList } from "./pie-selector/add-pie-dialog"
 interface InvestmentListProps {
   investments: AssetBalance[]
-  pies: AssetBalance[]
+  pies: Pie[]
 }
 
 export function InvestmentList({ investments, pies }: InvestmentListProps) {

@@ -1,14 +1,13 @@
 "use client"
 
-import { InvestmentListItem } from "@/components/investment-list-item"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { useState } from "react"
+import { InvestmentListItem } from "../investment-list-item"
 import StepperStates from "./stepper-states"
 
 export const PieList = ({ pies }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false)
-
   return (
     <>
       {/* <InvestmentListItemSkeleton /> */}
@@ -19,9 +18,7 @@ export const PieList = ({ pies }) => {
           </p>
         </div>
       )}
-      {pies.map((investment) => (
-        <InvestmentListItem key={investment.asset} data={investment} />
-      ))}
+      {pies?.map((pie) => <InvestmentListItem key={pie.id} data={pie} />)}
       <div className="flex justify-center">
         <Dialog open={dropdownOpen} onOpenChange={setDropdownOpen}>
           <DialogTrigger>
