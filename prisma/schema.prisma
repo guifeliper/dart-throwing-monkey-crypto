@@ -87,8 +87,8 @@ model VerificationToken {
 model Pie {
   id          Int      @id @default(autoincrement())
   name        String
-  description String
-  target      Int
+  description String?
+  target      Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   type        String
@@ -96,20 +96,20 @@ model Pie {
 
   author User @relation(fields: [authorId], references: [id])
 
-  holdings Holding[]
+  slices Slice[]
 
   @@map(name: "pies")
 }
 
-model Holding {
-  id         Int      @id @default(autoincrement())
-  asset      String
-  percentage Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  pieId      Int
+model Slice {
+  id        Int      @id @default(autoincrement())
+  asset     String
+  target    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pieId     Int
 
   pie Pie @relation(fields: [pieId], references: [id])
 
-  @@map(name: "holdings")
+  @@map(name: "slices")
 }

@@ -24,8 +24,7 @@ const pieFormSchema = z.object({
   slices: z
     .array(
       z.object({
-        name: z.string().optional(),
-        symbol: z.string().optional(),
+        asset: z.string().optional(),
         target: z.number().optional(),
       })
     )
@@ -43,26 +42,38 @@ export default function StepperStates({
 }: {
   setDropdownOpen: Dispatch<SetStateAction<boolean>>
 }) {
-  const {
-    nextStep,
-    prevStep,
-    resetSteps,
-    activeStep,
-    isDisabledStep,
-    isLastStep,
-  } = useStepper({
-    initialStep: 0,
-    steps,
-  })
+  const { nextStep, prevStep, activeStep, isDisabledStep, isLastStep } =
+    useStepper({
+      initialStep: 0,
+      steps,
+    })
   const form = useForm<PieFormValues>({
     resolver: zodResolver(pieFormSchema),
     defaultValues,
     mode: "onChange",
   })
 
-  function onSubmit(data: PieFormValues) {
+  async function onSubmit(data: PieFormValues) {
     console.log("data", data)
-    setDropdownOpen(false)
+
+    try {
+      const response = await fetch("/api/users/create-pie", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (response.ok) {
+        console.log("Pie created successfully!")
+        setDropdownOpen(false)
+      } else {
+        console.error("Failed to create pie")
+      }
+    } catch (error) {
+      console.error("Failed to create pie", error)
+    }
   }
 
   return (

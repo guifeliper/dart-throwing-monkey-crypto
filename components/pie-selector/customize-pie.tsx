@@ -66,7 +66,7 @@ export const CustomizePie = () => {
             {fields.map((field, index) => (
               <div className="grid gap-4" key={index}>
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="target">{field.symbol}</Label>
+                  <Label htmlFor="target">{field.asset}</Label>
                   <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
                     TOTAL - {field.target.toFixed(2)}%
                   </span>

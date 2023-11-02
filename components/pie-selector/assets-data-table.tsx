@@ -154,7 +154,7 @@ export function AssetsDataTable() {
     if (dataSelected.length > 0) {
       const slices = dataSelected.map((item) => ({
         name: item.name,
-        symbol: item.symbol,
+        asset: item.symbol,
         target: 100 / dataSelected.length,
       }))
       remove()
