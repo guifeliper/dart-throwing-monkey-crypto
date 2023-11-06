@@ -71,16 +71,16 @@ export const CustomizePie = () => {
             {fields.map((field, index) => (
               <div className="grid gap-4" key={index}>
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="target">{field.asset}</Label>
+                  <Label htmlFor="target">{(field as any).asset}</Label>
                   <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
-                    TOTAL - {field.target.toFixed(2)}%
+                    TOTAL - {(field as any).target.toFixed(2)}%
                   </span>
                 </div>
                 <div className="flex gap-4">
                   <Slider
                     id="target"
                     max={100}
-                    defaultValue={[field.target]}
+                    defaultValue={[(field as any).target]}
                     step={1}
                     onValueChange={(value) =>
                       update(index, { ...field, target: value[0] })

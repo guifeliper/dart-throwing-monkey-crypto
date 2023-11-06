@@ -45,22 +45,28 @@ export function InvestmentListItem({
       </Avatar>
       <div className="ml-4 space-y-1">
         <p className="text-sm font-medium leading-none">
-          {data.asset || data?.name}
+          {"asset" in data ? data.asset : data.name}
         </p>
-        <p className="text-sm text-muted-foreground">{data?.pair}</p>
+        <p className="text-sm text-muted-foreground">
+          {"pair" in data ? data.pair : null}
+        </p>
       </div>
       <div className="ml-auto space-y-1">
         <p className="text-right text-sm font-medium leading-none">
-          {data?.totalFIAT?.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
+          {"totalFIAT" in data
+            ? data?.totalFIAT?.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : null}
         </p>
         <p className="text-right text-sm text-muted-foreground">
-          {data?.quantity?.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}
+          {"quantity" in data
+            ? data?.quantity?.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
+            : null}
         </p>
       </div>
     </div>
