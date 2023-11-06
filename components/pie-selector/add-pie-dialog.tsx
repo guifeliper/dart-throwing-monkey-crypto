@@ -2,12 +2,12 @@
 
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { useState } from "react"
+import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
 import { InvestmentListItem } from "../investment-list-item"
 import StepperStates from "./stepper-states"
 
 export const PieList = ({ pies }) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const { dialogOpen, setDialogOpen } = useInstrumentSelection()
   return (
     <>
       {/* <InvestmentListItemSkeleton /> */}
@@ -20,14 +20,14 @@ export const PieList = ({ pies }) => {
       )}
       {pies?.map((pie) => <InvestmentListItem key={pie.id} data={pie} />)}
       <div className="flex justify-center">
-        <Dialog open={dropdownOpen} onOpenChange={setDropdownOpen}>
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-blue-600/75 text-white hover:bg-blue-600/30">
               Create a Pie
             </Button>
           </DialogTrigger>
           <DialogContent>
-            <StepperStates setDropdownOpen={setDropdownOpen} />
+            <StepperStates />
           </DialogContent>
         </Dialog>
       </div>

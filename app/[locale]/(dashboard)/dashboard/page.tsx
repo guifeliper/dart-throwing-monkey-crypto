@@ -13,7 +13,6 @@ export default function DashboardPage() {
         <InvestmentSideBar />
       </div>
       <div className="gap-4">
-        {" "}
         <Holdings />
       </div>
     </Fragment>

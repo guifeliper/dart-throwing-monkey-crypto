@@ -1,13 +1,12 @@
 "use client"
 
-import { HoldingsPieChart } from "@/components/holdings-pie-chart"
 import { HoldingsTable } from "@/components/holdings-table"
 import { buttonVariants } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
 import { cn } from "@/lib/utils"
 export const Holdings = () => {
-  const { selectedInstrument } = useInstrumentSelection()
+  const { selectedInstrument, setDialogOpen } = useInstrumentSelection()
   return (
     <Card>
       <CardHeader>
@@ -18,7 +17,7 @@ export const Holdings = () => {
       <CardContent>
         <div className="grid grid-cols-2 gap-4 p-5">
           <div className="mx-6 my-16 shrink-0">
-            <HoldingsPieChart />
+            {/* <HoldingsPieChart /> */}
           </div>
           <div className="flex flex-col items-center justify-center">
             <div className="uppercase">Holdings value</div>
@@ -32,6 +31,7 @@ export const Holdings = () => {
               <button
                 type="submit"
                 className={cn(buttonVariants(), "uppercase ")}
+                onClick={() => setDialogOpen(true, "edit")}
               >
                 Edit me
               </button>

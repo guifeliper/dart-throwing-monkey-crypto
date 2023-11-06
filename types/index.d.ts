@@ -97,9 +97,15 @@ export type SlicePie = {
 }
 
 export type Pie = {
-  id: string
+  id: number
   name: string
+  description?: string
+  target?: number
   value: number
   color: string
+  slices: SlicePie[]
+}
+
+type PieFormSchema = Pie & {
   slices: SlicePie[]
 }

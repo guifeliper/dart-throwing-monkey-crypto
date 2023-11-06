@@ -34,6 +34,11 @@ export const CustomizePie = () => {
     setTotalTarget(calculateFinalValue(fields))
   }, [fields])
 
+  const handleRemoveItem = (e, index) => {
+    e.preventDefault()
+    remove(index)
+  }
+
   return (
     <div className="flex flex-col space-y-8 py-4 lg:flex-row lg:space-x-12 lg:space-y-0">
       <aside className="mx-4 lg:w-1/5">
@@ -86,7 +91,7 @@ export const CustomizePie = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => remove(index)}
+                    onClick={(e) => handleRemoveItem(e, index)}
                   >
                     <XIcon className="h-4 w-4" />
                   </Button>

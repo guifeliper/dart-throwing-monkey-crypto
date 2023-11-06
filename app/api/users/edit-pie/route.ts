@@ -24,7 +24,16 @@ export async function POST(
   console.log("body", JSON.stringify(pieFormSchema))
 
   try {
-    const pie = await db.pie.create({
+    const pieId = pieFormSchema.id
+
+    await db.slice.deleteMany({
+      where: {
+        pieId: pieId,
+      },
+    })
+
+    const pie = await db.pie.update({
+      where: { id: pieId },
       data: {
         name: pieFormSchema.name,
         description: pieFormSchema?.description ?? "",

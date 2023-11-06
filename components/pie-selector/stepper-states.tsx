@@ -10,8 +10,8 @@ import * as z from "zod"
 
 import { DialogFooter } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
-import { useRouter } from "next/router"
-import { Dispatch, SetStateAction } from "react"
+import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
+import { useRouter } from "next-intl/client"
 import { AssetsDataTable } from "./assets-data-table"
 import { CustomizePie } from "./customize-pie"
 
@@ -21,6 +21,7 @@ const steps = [
 ] satisfies StepConfig[]
 
 const pieFormSchema = z.object({
+  id: z.number().optional(),
   name: z.string().optional(),
   slices: z
     .array(
@@ -38,37 +39,45 @@ const defaultValues: Partial<PieFormValues> = {
   slices: [],
 }
 
-export default function StepperStates({
-  setDropdownOpen,
-}: {
-  setDropdownOpen: Dispatch<SetStateAction<boolean>>
-}) {
-  const router = useRouter()
+export default function StepperStates() {
+  const { setDialogOpen, selectedInstrument } = useInstrumentSelection()
   const { nextStep, prevStep, activeStep, isDisabledStep, isLastStep } =
     useStepper({
-      initialStep: 0,
+      initialStep: selectedInstrument ? 1 : 0,
       steps,
     })
   const form = useForm<PieFormValues>({
     resolver: zodResolver(pieFormSchema),
-    defaultValues,
+    defaultValues: selectedInstrument ?? defaultValues,
     mode: "onChange",
   })
 
+  const router = useRouter()
   async function onSubmit(data: PieFormValues) {
     try {
-      const response = await fetch("/api/users/create-pie", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
+      let response
+      if (data.id) {
+        response = await fetch("/api/users/edit-pie", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+      } else {
+        response = await fetch("/api/users/create-pie", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+      }
 
       if (response.ok) {
         console.log("Pie created successfully!")
-        setDropdownOpen(false)
-        router.reload()
+        setDialogOpen(false)
+        router.refresh()
       } else {
         console.error("Failed to create pie")
       }
@@ -98,6 +107,16 @@ export default function StepperStates({
           </DialogFooter>
         </div>
       </form>
+      <div className="bg-red p-2 text-white">
+        {process.env.NODE_ENV === "production"
+          ? null
+          : JSON.stringify(form.formState.errors)}
+      </div>
     </Form>
   )
 }
+
+//TODO:
+// 1. Create the edit-pie endpoint
+// 2. Create the delete-pie endpoint
+// 3. Make the create pie button and empty canvas

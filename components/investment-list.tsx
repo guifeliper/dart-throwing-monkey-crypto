@@ -19,10 +19,10 @@ interface InvestmentListProps {
 
 export function InvestmentList({ investments, pies }: InvestmentListProps) {
   return (
-    <Tabs defaultValue="investments" className="h-full w-full">
+    <Tabs defaultValue="pies" className="h-full w-full">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="investments">Invesments</TabsTrigger>
         <TabsTrigger value="pies">Pies</TabsTrigger>
+        <TabsTrigger value="investments">Invesments</TabsTrigger>
       </TabsList>
       <TabsContent value="pies">
         <Card>
