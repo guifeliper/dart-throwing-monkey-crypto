@@ -1,19 +1,20 @@
+import { executeTradePlan } from "@/lib/execute-trade-plan"
 import { generateTradePlan } from "@/lib/generate-trade-plan"
 import { getKrakenBalance } from "@/lib/get-kraken-balance"
 import { NextResponse } from "next/server"
 import { z } from "zod"
 
 const carteira = [
-  { asset: "XETH", weight: 42.41 },
-  { asset: "XXBT", weight: 29.11 },
-  { asset: "MATIC", weight: 7.26 },
-  { asset: "LDO", weight: 7.03 },
-  { asset: "LINK", weight: 1.15 },
-  { asset: "DOT", weight: 0.64 },
-  { asset: "UNI", weight: 0.52 },
-  { asset: "OP", weight: 0.21 },
-  { asset: "ARB", weight: 0.19 },
-  { asset: "USD", weight: 11.48 },
+  { asset: "XETH", weight: 0 },
+  { asset: "XXBT", weight: 0 },
+  { asset: "MATIC", weight: 0 },
+  { asset: "LDO", weight: 0 },
+  { asset: "LINK", weight: 0 },
+  { asset: "DOT", weight: 0 },
+  { asset: "UNI", weight: 0 },
+  { asset: "OP", weight: 0 },
+  { asset: "ARB", weight: 0 },
+  { asset: "USD", weight: 100 },
 ]
 
 export async function GET() {
@@ -34,7 +35,7 @@ export async function GET() {
       10
     )
 
-    // await executeTradePlan(tradePlan)
+    await executeTradePlan(tradePlan)
 
     return NextResponse.json({ tradePlan }, { status: 200 })
   } catch (error) {

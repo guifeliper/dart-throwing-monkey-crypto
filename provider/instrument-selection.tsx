@@ -9,6 +9,7 @@ type InstrumentSelectionContextType = {
   setSelectedInstrument: React.Dispatch<React.SetStateAction<Pie | null>>
   dialogOpen: boolean
   setDialogOpen: (isOpen: boolean, type?: DialogType) => void
+  dialogType: DialogType
 }
 
 export const InstrumentSelectionContext =
@@ -17,6 +18,7 @@ export const InstrumentSelectionContext =
     setSelectedInstrument: () => {},
     dialogOpen: false,
     setDialogOpen: () => {},
+    dialogType: "new",
   })
 
 type InstrumentSelectionProviderProps = {
@@ -28,11 +30,11 @@ export const InstrumentSelectionProvider = ({
 }: InstrumentSelectionProviderProps) => {
   const [selectedInstrument, setSelectedInstrument] = useState<Pie | null>(null)
   const [dialogOpen, setDialogOpenOrClose] = useState(false)
-  const [_, setDialog] = useState<DialogType>("new")
+  const [dialogType, setDialogType] = useState<DialogType>("new")
 
   const setDialogOpen = (isOpen: boolean, type?: DialogType) => {
+    setDialogType(type ?? "new")
     setDialogOpenOrClose(isOpen)
-    setDialog(type ?? "new")
   }
 
   return (
@@ -42,6 +44,7 @@ export const InstrumentSelectionProvider = ({
         setSelectedInstrument,
         dialogOpen,
         setDialogOpen,
+        dialogType,
       }}
     >
       {children}

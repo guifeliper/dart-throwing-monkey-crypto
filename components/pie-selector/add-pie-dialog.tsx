@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
@@ -10,7 +8,6 @@ export const PieList = ({ pies }) => {
   const { dialogOpen, setDialogOpen } = useInstrumentSelection()
   return (
     <>
-      {/* <InvestmentListItemSkeleton /> */}
       {pies.length === 0 && (
         <div className="py-4">
           <p className="text-sm text-muted-foreground">

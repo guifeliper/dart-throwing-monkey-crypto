@@ -1,5 +1,3 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { Step, StepConfig, Steps } from "@/components/ui/stepper"
 import { useStepper } from "@/components/ui/use-stepper"
@@ -27,9 +25,13 @@ const pieFormSchema = z.object({
     .array(
       z.object({
         asset: z.string().optional(),
-        target: z.number().optional(),
+        target: z.number().min(0).max(100).optional(),
       })
     )
+    .refine((slices) => {
+      const sum = slices.reduce((acc, slice) => acc + (slice.target ?? 0), 0)
+      return sum <= 100
+    }, "The sum of all slice targets cannot be greater than 100")
     .optional(),
 })
 type PieFormValues = z.infer<typeof pieFormSchema>
@@ -40,19 +42,25 @@ const defaultValues: Partial<PieFormValues> = {
 }
 
 export default function StepperStates() {
-  const { setDialogOpen, selectedInstrument } = useInstrumentSelection()
+  const router = useRouter()
+  const { dialogType, setDialogOpen, selectedInstrument } =
+    useInstrumentSelection()
   const { nextStep, prevStep, activeStep, isDisabledStep, isLastStep } =
     useStepper({
-      initialStep: selectedInstrument ? 1 : 0,
+      initialStep: dialogType === "edit" ? 1 : 0,
       steps,
     })
+
+  const value =
+    (dialogType === "edit" ? selectedInstrument : defaultValues) ??
+    defaultValues
+
   const form = useForm<PieFormValues>({
     resolver: zodResolver(pieFormSchema),
-    defaultValues: selectedInstrument ?? defaultValues,
+    defaultValues: value,
     mode: "onChange",
   })
 
-  const router = useRouter()
   async function onSubmit(data: PieFormValues) {
     try {
       let response
@@ -75,9 +83,9 @@ export default function StepperStates() {
       }
 
       if (response.ok) {
+        router.refresh()
         console.log("Pie created successfully!")
         setDialogOpen(false)
-        router.refresh()
       } else {
         console.error("Failed to create pie")
       }
@@ -117,6 +125,6 @@ export default function StepperStates() {
 }
 
 //TODO:
-// 1. Create the edit-pie endpoint
+// 1. Create the edit-pie endpoint (done)
 // 2. Create the delete-pie endpoint
-// 3. Make the create pie button and empty canvas
+// 3. Make the create pie button and empty canvas (done)
