@@ -1,11 +1,20 @@
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
+import { useEffect } from "react"
 import { InvestmentListItem } from "../investment-list-item"
 import StepperStates from "./stepper-states"
 
 export const PieList = ({ pies }) => {
-  const { dialogOpen, setDialogOpen } = useInstrumentSelection()
+  const { dialogOpen, setDialogOpen, setSelectedInstrument } =
+    useInstrumentSelection()
+
+  useEffect(() => {
+    if (pies.length > 0) {
+      setSelectedInstrument(pies[0])
+    }
+  }, [pies, setSelectedInstrument])
+
   return (
     <>
       {pies.length === 0 && (
