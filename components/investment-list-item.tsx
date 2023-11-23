@@ -1,8 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar } from "@/components/ui/avatar"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
 import { cn } from "@/lib/utils"
 import { AssetBalance, Pie } from "@/types"
+import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { VariantProps, cva } from "class-variance-authority"
 import React from "react"
 
@@ -37,11 +38,24 @@ export function InvestmentListItem({
     if ("asset" in data) return
     setSelectedInstrument(data)
   }
+
+  const getLogo = () => {
+    if ("type" in data && data?.type === "KRAKEN") {
+      return "/kraken-logo.png"
+    }
+    return ""
+  }
+  console.log(selected, data)
   return (
     <div className={cn(wrapperVariants({ selected }))} onClick={handleClick}>
-      <Avatar className="h-9 w-9">
-        <AvatarImage src="" alt="Avatar" />
-        <AvatarFallback>OM</AvatarFallback>
+      <Avatar className="h-9 w-16">
+        <AvatarImage
+          src={getLogo()}
+          alt="Company logo"
+          width={64}
+          height={36}
+        />
+        <AvatarFallback>Co</AvatarFallback>
       </Avatar>
       <div className="ml-4 space-y-1">
         <p className="text-sm font-medium leading-none">

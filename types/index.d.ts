@@ -106,6 +106,7 @@ export type Pie = {
   value: number
   color: string
   slices: SlicePie[]
+  type: string
 }
 
 type PieFormSchema = Pie & {
