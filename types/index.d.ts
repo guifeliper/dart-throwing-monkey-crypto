@@ -93,7 +93,9 @@ export type SlicePie = {
   id: string
   name: string
   asset: string
+  current: number
   target: number
+  value: number
 }
 
 export type Pie = {

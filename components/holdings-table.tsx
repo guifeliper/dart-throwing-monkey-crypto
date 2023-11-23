@@ -25,8 +25,10 @@ export function HoldingsTable() {
         {selectedInstrument?.slices.map((item, i) => (
           <TableRow key={i}>
             <TableCell className="font-medium">{item.asset}</TableCell>
-            <TableCell>-/{item.target}</TableCell>
-            <TableCell>{"-"}</TableCell>
+            <TableCell>
+              {item.current?.toFixed(2) ?? "0"}/{item.target ?? "-"}
+            </TableCell>
+            <TableCell>{item.value?.toFixed(2) ?? "-"}</TableCell>
             <TableCell className="text-right">{"-"}</TableCell>
           </TableRow>
         ))}

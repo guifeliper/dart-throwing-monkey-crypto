@@ -35,6 +35,7 @@ export function InvestmentListItem({
 
   const handleClick = () => {
     if ("asset" in data) return
+    console.log(data)
     setSelectedInstrument(data)
   }
   return (

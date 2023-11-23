@@ -9,7 +9,7 @@ import * as z from "zod"
 import { DialogFooter } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
 import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
-import { useRouter } from "next-intl/client"
+import { useRouter } from "next/navigation"
 import { AssetsDataTable } from "./assets-data-table"
 import { CustomizePie } from "./customize-pie"
 
@@ -83,7 +83,7 @@ export default function StepperStates() {
       }
 
       if (response.ok) {
-        router.refresh()
+        router.replace("/dashboard")
         console.log("Pie created successfully!")
         setDialogOpen(false)
       } else {
