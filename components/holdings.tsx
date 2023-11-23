@@ -15,14 +15,12 @@ export const Holdings = () => {
         </CardTitle>
         <div className="grid grid-cols-2 gap-2">
           <button
-            type="submit"
             className={cn(buttonVariants(), "uppercase ")}
             onClick={() => setDialogOpen(true, "edit")}
           >
             Edit me
           </button>
           <button
-            type="submit"
             className={cn(buttonVariants({ variant: "outline" }), "uppercase")}
           >
             Rebalance
