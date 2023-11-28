@@ -45,7 +45,7 @@ export function InvestmentListItem({
     }
     return ""
   }
-  console.log(selected, data)
+
   return (
     <div className={cn(wrapperVariants({ selected }))} onClick={handleClick}>
       <Avatar className="h-9 w-16">

@@ -31,7 +31,9 @@
   },
   "Dashboard": {
     "portfolio": "Portfolio",
-    "manage-portfolio": "Manage your own Portfolio"
+    "manage-portfolio": "Manage your own Portfolio",
+    "rebalance": "Rebalance",
+    "edit-me": "Edit me"
   },
   "Dashboard-Billing": {
     "billing": "Billing",

@@ -31,7 +31,9 @@
   },
   "Dashboard": {
     "portfolio": "Portfólio",
-    "manage-portfolio": "Gerencie seu próprio Portfólio"
+    "manage-portfolio": "Gerencie seu próprio Portfólio",
+    "rebalance": "Rebalancear",
+    "edit-me": "Editar"
   },
   "Dashboard-Billing": {
     "billing": "Faturamento",

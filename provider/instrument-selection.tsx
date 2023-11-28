@@ -1,6 +1,5 @@
 "use client"
 import { Pie } from "@/types"
-import { useRouter } from "next/navigation"
 import React, { createContext, useState } from "react"
 
 type DialogType = "new" | "edit"
@@ -32,7 +31,6 @@ export const InstrumentSelectionProvider = ({
   const [selectedInstrument, setSelectedInstrument] = useState<Pie | null>(null)
   const [dialogOpen, setDialogOpenOrClose] = useState(false)
   const [dialogType, setDialogType] = useState<DialogType>("new")
-  const router = useRouter()
 
   const setDialogOpen = (isOpen: boolean, type?: DialogType) => {
     setDialogType(type ?? "new")

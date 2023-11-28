@@ -8,6 +8,7 @@ import * as z from "zod"
 
 import { DialogFooter } from "@/components/ui/dialog"
 import { Form } from "@/components/ui/form"
+import { toast } from "@/components/ui/use-toast"
 import { useInstrumentSelection } from "@/hooks/use-instrument-selection"
 import { useRouter } from "next/navigation"
 import { AssetsDataTable } from "./assets-data-table"
@@ -85,12 +86,24 @@ export default function StepperStates() {
       if (response.ok) {
         router.replace("/dashboard")
         console.log("Pie created successfully!")
+        toast({
+          title: "Pie created/edit successfully",
+          description: "Your pie has been created/edited.",
+        })
         setDialogOpen(false)
       } else {
+        toast({
+          title: "An error occurred",
+          description: "Sorry, something went wrong. Please try again.",
+        })
         console.error("Failed to create pie")
       }
     } catch (error) {
       console.error("Failed to create pie", error)
+      toast({
+        title: "Failed to create pie",
+        description: "Sorry, something went wrong. Please try again.",
+      })
     }
   }
 
@@ -123,8 +136,3 @@ export default function StepperStates() {
     </Form>
   )
 }
-
-//TODO:
-// 1. Create the edit-pie endpoint (done)
-// 2. Create the delete-pie endpoint
-// 3. Make the create pie button and empty canvas (done)
